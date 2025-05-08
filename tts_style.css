@@ -1,0 +1,158 @@
+@font-face {
+    font-family: 'CalSans';
+    src: url('fonts/CalSans-Regular.ttf') format('truetype');
+  }
+
+body{
+    font-family: 'CalSans', sans-serif;
+    background-color: #121212;
+}
+
+p{
+    font-size: 20px;
+    color: rgb(207, 216, 74);
+    margin: 10px;
+    margin-top: 30px;
+    margin-left: 60px;
+    margin-right: 60px;
+}
+
+#intro{
+    margin-bottom: 70px;
+}
+
+h1 {
+    font-size: 90px;
+    text-align: center;
+    color: #c87100; 
+    margin-top: 0;
+}
+
+h2 {
+    font-size: 30px;
+    text-align: center;
+    color: #FFD369; 
+}
+
+h3 {
+    margin-left: 15px;
+    color: #FFD369; 
+    font-size: 20px;
+}
+
+.sintesis {
+    color: #ff711f; 
+    font-size: 40px;
+    font-weight: bold;
+}
+
+.v_p{
+    color: #ff8138; 
+    font-size: 20px;
+    font-weight: bold;
+}
+
+h4 {
+    margin: 20px;
+    color: #B0BEC5; 
+    font-size: 1.1em;
+}
+
+li{
+    font-size: 18px;
+    color: #ffb656; 
+}
+
+#cursor{
+    z-index: 2;
+    position: absolute;
+    left: 40%;
+    animation: upDown 2s ease-in-out infinite;
+    transition:  1s ease;
+    rotate: 150deg;
+    width: 50px;
+}
+
+@keyframes upDown {
+    0%, 100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-24px); /* move up */
+    }
+}
+
+#mono1,
+#mono2,
+#humano {
+    filter: invert(30%);
+    transition: width 1s ease;
+    cursor: pointer;
+}
+
+/* Set initial widths */
+#mono1 {
+    width: 100px;
+}
+
+#mono2 {
+    width: 105px;
+}
+
+#humano {
+    width: 145px;
+}
+
+/* Hover effects */
+#mono1:hover {
+    width: 135px;
+    margin-right: 10px;
+}
+
+#mono2:hover {
+    width: 130px;
+}
+
+#humano:hover {
+    width: 160px;
+}
+
+
+.image-container#container1 {
+    text-align: center;
+    padding: 20px;
+    height: 245px; /* Slightly larger than your largest image's hover size */
+    overflow: hidden;
+    position: relative;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.synthesis-section {
+    display: none; /* Initially hide all sections */
+    overflow-y: auto;
+    padding: 20px;
+}
+
+.placeholder {
+    height: 400px; /* height of expanded image */
+    visibility: hidden;
+}
+
+#test_button {
+    font-family: 'CalSans', sans-serif;
+    margin-left: 20%;
+    color: rgb(255, 255, 255);
+    background-color: #7e5929;
+    padding: 12px 20px;
+    font-size: 16px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    width:fit-content;
+    margin-top: 20px;
+}

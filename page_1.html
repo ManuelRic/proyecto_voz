@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="tts_style.css">
+    
+    <title>TTS</title>
+</head>
+<body>
+
+    <h1>TTS</h1>
+
+    <p id="intro">
+        Hoy en día, la manera en que interactuamos con las máquinas se siente tan natural que hace unos diez años sería ciencia ficción. Uno de los grandes saltos adelante es la tecnología Text-to-Speech (TTS), o pasar texto a voz, que deja la creación de textos se conviertan en audios como si lo leyera una persona. Esta tecnología es súper importante en muchas áreas: desde ayudantes virtuales como Google Assistant o Siri, hasta programas que leen la pantalla para gente con problemas de visión, sin olvidar los GPS, las voces automatizadas que oímos al llamar a algún sitio, los juegos o la creación de videos y demás contenidos. Con el tiempo, la forma en que se crea la voz artificial ha ido cambiando, desde juntar pedacitos de voz grabada hasta usar modelos neuronales complicados que pueden generar voces que suenan naturales, con su ritmo, su entonación y hasta sus emociones. Aquí destacan tecnologías como Tacotron y WaveNet, creadas por Google, que han cambiado por completo cómo se hace el habla artificial. Este trabajo busca averiguar cómo funcionan los sistemas TTS, centrándonos en cómo lo hace Google Cloud Text-to-Speech, mirando sus partes internas, los modelos que usa y cómo se puede personalizar la voz. También hablaremos de los desafíos que hay ahora, los problemas éticos de esta tecnología y cómo está cambiando nuestra relación con la inteligencia artificial. 
+    </p>
+
+    <h2>Evolución</h2>
+
+    <div class="image-container" id="container1">
+        <img src="img/ev_1/cursor.png" id="cursor">
+        <img src="img/ev_1/mono1.png" alt="Image 1" id="mono1" class="ev_img">
+        <img src="img/ev_1/mono2.png" alt="Image 2" id="mono2" class="ev_img">   
+        <img src="img/ev_1/humano.png" alt="Image 3" id="humano" class="ev_img">
+    </div>
+    
+    <div class="synthesis-container">
+        <div class="synthesis-section" id="SC">
+            <h3><span class="sintesis">Síntesis</span> <span class="glitch-text">Concatenativa</span></h3>
+            <p>Los primeros sistemas de síntesis de voz (TTS) funcionaban mediante la concatenación de fragmentos de audio grabados por una persona real. En este enfoque, se creaba una base de datos con pequeños fragmentos de sonido correspondientes a palabras, sílabas o fonemas. Cuando el sistema debía leer un texto, buscaba y unía estos fragmentos para formar las palabras y frases deseadas, como si se estuviera armando un rompecabezas de sonidos. Aunque este método permitió crear voces sintéticas, presentaba limitaciones, como la falta de fluidez y naturalidad en las transiciones entre los sonidos, así como una flexibilidad limitada para generar frases no previamente grabadas. A medida que la tecnología avanzaba, surgieron nuevos métodos como la síntesis paramétrica y, más recientemente, la síntesis neural, que han permitido desarrollar sistemas TTS mucho más naturales, capaces de imitar las variaciones de la voz humana en cuanto a entonación, ritmo y emociones.</p>
+            <ul>
+                <li>
+                    <span class="v_p">Ventajas:</span>
+                    <ul>
+                        <li>Produce una voz muy natural si las unidades grabadas encajan bien, ya que utiliza fragmentos reales de voz humana.</li>
+                        <li>No requiere tanta capacidad de cómputo como los modelos neuronales modernos.</li>
+                        <li>Calidad consistente en contextos controlados o frases predefinidas.</li>
+                        <li>Buena opción cuando se necesita una voz fija con alta fidelidad en un dominio limitado.</li>
+                    </ul>
+                </li>
+                <li>
+                    <span class="v_p">Problemas:</span>
+                    <ul>
+                        <li>Falta de flexibilidad: depende completamente de las grabaciones existentes, lo que limita la variación y expresividad.</li>
+                        <li>Puede generar saltos o discontinuidades en la voz cuando las unidades no se empalman perfectamente.</li>
+                        <li>No escala bien a múltiples idiomas o voces sin grabar grandes bases de datos específicas.</li>
+                        <li>El almacenamiento de todas las unidades de audio puede requerir mucho espacio si se busca cobertura amplia.</li>
+                    </ul>
+                </li>
+            </ul>            
+        </div>
+        
+        <div class="synthesis-section" id="SP">
+            <h3><span class="sintesis">Síntesis</span> <span class="glitch-text">Paramétrica</span></h3>
+            <p>Después llegaron los modelos matemáticos. En lugar de usar grabaciones completas, estos sistemas intentaron simular la voz humana mediante fórmulas y estadísticas. Utilizando modelos matemáticos, se podían generar sonidos de manera más flexible, sin depender de una base de datos pregrabada de palabras o fragmentos de audio. Estos modelos trabajaban creando las ondas sonoras a partir de parámetros calculados que replicaban las características del habla humana, como la frecuencia, la duración y el tono. Aunque este enfoque mejoró la fluidez y la capacidad de generar una variedad más amplia de sonidos, aún presentaba desafíos en términos de naturalidad, ya que no siempre lograba imitar perfectamente las sutilezas del lenguaje humano.</p>
+            <ul>
+                <li>
+                    <span class="v_p">Ventajas:</span>
+                    <ul>
+                        <li>Requiere menos recursos computacionales que la síntesis neuronal, por lo que es más eficiente para dispositivos con poca potencia.</li>
+                        <li>Es más fácil de controlar y ajustar parámetros específicos como tono, velocidad o entonación.</li>
+                        <li>Puede generar voz en tiempo real sin necesidad de modelos pesados.</li>
+                        <li>Ideal para sistemas embebidos, hardware limitado o aplicaciones donde la naturalidad no es prioritaria.</li>
+                    </ul>
+                </li>
+                <li>
+                    <span class="v_p">Problemas:</span>
+                    <ul>
+                        <li>La voz suena más robótica o artificial en comparación con la síntesis neuronal.</li>
+                        <li>Limitada expresividad y menor capacidad de transmitir emociones humanas.</li>
+                        <li>Menor calidad general del audio, especialmente en frases largas o complejas.</li>
+                        <li>Menos adaptable a diferentes idiomas y acentos con resultados naturales.</li>
+                    </ul>
+                </li>
+            </ul>
+
+            <button id="test_button">¡Pruebalo!</button>
+        </div>
+        
+        <div class="synthesis-section" id="SN">
+            <h3><span class="sintesis">Síntesis</span> <span class="glitch-text">Neuronal</span></h3>
+            <p>La gran revolución vino con las redes neuronales. Usando inteligencia artificial, se entrenan modelos que aprenden cómo suena el habla humana de verdad. Ya no se pegan sonidos ni se simulan con fórmulas; ahora se genera la voz desde cero, una muestra de audio a la vez. Estos modelos de aprendizaje profundo, como WaveNet o Tacotron, analizan grandes cantidades de datos de audio y aprenden las complejidades del habla, incluyendo la entonación, el ritmo y las emociones, lo que permite crear voces mucho más naturales y realistas. Gracias a esta tecnología, la síntesis de voz ha alcanzado un nivel de calidad que se acerca mucho más al habla humana auténtica, transformando la manera en que interactuamos con asistentes virtuales, audiolibros y otros sistemas TTS.</p>
+            <ul>
+                <li>
+                    <span class="v_p">Ventajas:</span>
+                    <ul>
+                        <li>Sonido muy natural, con ritmo, entonación, pausas y hasta emociones. Mejoran constantemente con más datos y entrenamiento.</li>
+                        <li>Genera voces más realistas y expresivas, ideales para aplicaciones conversacionales, audiolibros y asistentes virtuales.</li>
+                        <li>Permite entrenar voces personalizadas, adaptadas a marcas, personajes o estilos específicos.</li>
+                        <li>Capacidad de adaptación a diferentes idiomas y acentos con alta fidelidad.</li>
+                    </ul>
+                </li>
+                <li>
+                    <span class="v_p">Problemas:</span>
+                    <ul>
+                        <li>Necesitan mucha potencia de cálculo (aunque si se usan desde la nube como en Google Cloud, eso no es problema para el usuario).</li>
+                        <li>Más difíciles de controlar sin herramientas específicas.</li>
+                        <li>Requiere grandes volúmenes de datos para alcanzar calidad óptima.</li>
+                        <li>Riesgo de uso malicioso, como deepfakes de voz o suplantación de identidad.</li>
+                        <li>El costo computacional puede ser elevado para entrenamientos personalizados fuera de plataformas en la nube.</li>
+                    </ul>
+                </li>
+            </ul>
+                       
+        </div>
+    </div>
+    
+    <div class="placeholder"></div>
+
+</body>
+<script src="tts_script.js"></script>
+</html>
