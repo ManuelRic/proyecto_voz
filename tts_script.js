@@ -98,3 +98,12 @@ img.addEventListener('mouseleave', () => {
     });
 });
 });
+
+const animatedElements = ['ext', 'o', 'peech'];
+
+animatedElements.forEach(id => {
+const el = document.getElementById(id);
+el.addEventListener('animationend', () => {
+    el.classList.add('interactable');
+});
+});
