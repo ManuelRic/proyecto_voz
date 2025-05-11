@@ -27,7 +27,6 @@
     }
 
     .tts-container {
-      background-color: #3d0000;
       padding: 30px;
       border-radius: 12px;
       box-shadow: 0 4px 12px rgba(0,0,0,0.1);
@@ -47,6 +46,7 @@
 
     #voiceSelect{
       font-family: 'CalSans', sans-serif;
+      width: fit-content;
     }
 
     label {
@@ -89,21 +89,25 @@
       margin-bottom: 30px;
     }
 
+    #speak_button:hover{
+      background-color: #d69200;
+    }
+
     #back_button{
       background-color: #912828;
       margin-bottom: 30px;
-    }   
-
-    button:hover {
-      background-color: #0056b3;
     }
 
+    #back_button:hover{
+      background-color: #6b1e1e;
+    }
+    
     input[type="range"] {
       -webkit-appearance: none;
       appearance: none;
-      height: 10px;
+      height: 1px;
       background: linear-gradient(to right, #007BFF 0%, #007BFF 0%, #ccc 0%, #ccc 100%);
-      border-radius: 5px;
+      border-radius: 11px;
     }
 
     input[type="range"]:focus {
@@ -114,11 +118,10 @@
     input[type="range"] {
         -webkit-appearance: none;
         appearance: none;
-        width: 100%; /* Make the slider fill the container */
-        height: 10px;
+        height: 1px;
         background: linear-gradient(to right, #007BFF 0%, #007BFF 0%, #ccc 0%, #ccc 100%);
-        border-radius: 5px;
-        cursor: pointer; /* Indicates the slider can be dragged */
+        border-radius: 11px;
+        cursor: pointer;
     }
 
       input[type="range"]:focus {
@@ -144,23 +147,23 @@
 
   <h2>🗣️ Text-to-Speech</h2>
   <div class="tts-container">
-    <label for="text">Enter text:</label>
-    <textarea id="text" rows="4">Try me out! Type something here...</textarea>
+    <label for="text">Introduzca su texto:</label>
+    <textarea id="text" rows="4">Escucha este mismo texto o redacta el tuyo propio.</textarea>
 
-    <label for="voiceSelect">Choose Voice:</label>
+    <label for="voiceSelect">Elegir Voz:</label>
     <select id="voiceSelect"></select>
 
-    <label for="rate">Rate:</label>
+    <label for="rate">Velocidad:</label>
     <input type="range" id="rate" min="0" max="2" step="0.01" value="1">
-    <div class="slider-value">Value: <span id="rateValue">1.0</span></div>
+    <div class="slider-value">Valor: ×<span id="rateValue">1.0</span></div>
 
-    <label for="pitch">Pitch:</label>
+    <label for="pitch">Tono:</label>
     <input type="range" id="pitch" min="0" max="2" step="0.01" value="1">
-    <div class="slider-value">Value: <span id="pitchValue">1.0</span></div>
+    <div class="slider-value">Valor: ×<span id="pitchValue">1.0</span></div>
 
-    <button onclick="speak()" id="speak_button">🔊 Speak</button>
+    <button onclick="speak()" id="speak_button">🔊 Reproducir</button>
 
-    <button id="back_button">Back</button>
+    <button id="back_button">Atrás</button>
   </div>
 
   <script>

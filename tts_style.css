@@ -4,9 +4,24 @@
   }
 
 body{
-    font-family: 'CalSans', sans-serif;
     background-color: #121212;
+    /*background-image: url('img/ev_1/bg1.png');*/
+    font-family: 'CalSans', sans-serif;
 }
+
+/*body::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: url('img/ev_1/bg1.png');
+  background-size: cover;
+  background-position: center;
+  filter: blur(10px);
+  z-index: -1;
+}*/
 
 p{
     font-size: 20px;
@@ -66,7 +81,7 @@ li{
 #cursor{
     z-index: 2;
     position: absolute;
-    left: 40%;
+    left: 35%;
     animation: upDown 2s ease-in-out infinite;
     transition:  1s ease;
     rotate: 150deg;
@@ -85,36 +100,33 @@ li{
 #mono1,
 #mono2,
 #humano {
-    filter: invert(30%);
-    transition: width 1s ease;
+    filter: invert(10%);
     cursor: pointer;
 }
 
 /* Set initial widths */
 #mono1 {
-    width: 100px;
+    width: 180px;
 }
 
 #mono2 {
-    width: 105px;
+    width: 210px;
 }
 
 #humano {
-    width: 145px;
+    width: 240px;
 }
 
-/* Hover effects */
-#mono1:hover {
-    width: 135px;
-    margin-right: 10px;
+.ev_img {
+  transition: transform 0.3s ease;
 }
 
-#mono2:hover {
-    width: 130px;
+.ev_img.shrink {
+  transform: scale(0.8);
 }
 
-#humano:hover {
-    width: 160px;
+.ev_img.grow {
+  transform: scale(1.2);
 }
 
 
@@ -143,7 +155,7 @@ li{
     visibility: hidden;
 }
 
-#test_button {
+#test_button_p {
     font-family: 'CalSans', sans-serif;
     margin-left: 20%;
     color: rgb(255, 255, 255);
@@ -156,3 +168,18 @@ li{
     width:fit-content;
     margin-top: 20px;
 }
+
+#test_button_n {
+    font-family: 'CalSans', sans-serif;
+    margin-left: 20%;
+    color: rgb(255, 255, 255);
+    background-color: #7e5929;
+    padding: 12px 20px;
+    font-size: 16px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    width:fit-content;
+    margin-top: 20px;
+}
+

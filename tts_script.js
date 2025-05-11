@@ -59,10 +59,42 @@ let cursorHidden = false;
 // __________________________
 
 document.addEventListener("DOMContentLoaded", function () {
-  const testButton = document.getElementById("test_button");
+  const testButton = document.getElementById("test_button_p");
 
   // Redirect to the TTS page when the "¡Pruébalo!" button is clicked
   testButton.addEventListener("click", function() {
-      window.location.href = "TTeSt.html";  // Replace with the URL of your TTS page
+      window.location.href = "parametrica.html";  // Replace with the URL of your TTS page
   });
+});
+
+document.addEventListener("DOMContentLoaded", function () {
+  const testButton = document.getElementById("test_button_n");
+
+  // Redirect to the TTS page when the "¡Pruébalo!" button is clicked
+  testButton.addEventListener("click", function() {
+      window.location.href = "neuronal.html";  // Replace with the URL of your TTS page
+  });
+});
+
+
+
+const images = document.querySelectorAll('.ev_img');
+
+images.forEach(img => {
+img.addEventListener('mouseenter', () => {
+    images.forEach(other => {
+    if (other !== img) {
+        other.classList.add('shrink');
+        other.classList.remove('grow');
+    } else {
+        img.classList.add('grow');
+    }
+    });
+});
+
+img.addEventListener('mouseleave', () => {
+    images.forEach(other => {
+    other.classList.remove('shrink', 'grow');
+    });
+});
 });
