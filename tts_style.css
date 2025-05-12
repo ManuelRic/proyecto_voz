@@ -38,6 +38,8 @@ p{
 
 h1 {
     color: #c87100;
+    padding: 0;
+    margin: 0;
 }
 
 @keyframes fadeIn {
@@ -54,47 +56,28 @@ font-size: 90px;
 text-align: center;
 }
 
-#acronyms span {
-  transition: margin 1.5s ease-in-out;
-  margin: 0; /* or your default margin */
+#acronyms:hover{
+    animation: fadeIn 2s ease-in-out;
+}
+#acronyms:hover #ext{
+animation: fadeIn 2s ease-in-out;
+display:inline;
 }
 
-#acronyms:hover span {
-  margin: 50px;
+#acronyms:hover #o{
+animation: fadeIn 2s ease-in-out;
+display: inline;
 }
 
-#ext, #o, #peech{
-font-size: 60px;
-display: none;
-}
-
-#acronyms:hover ~ #ext{
-animation: fadeIn 3s ease-in-out;
-display: block;
-position:absolute;
-top: 5.35%;
-left: 42.8%;
-}
-
-#acronyms:hover ~ #o{
-animation: fadeIn 3s ease-in-out;
-display: block;
-position: absolute;
-top: 5.35%;
-left: 50.8%;
-}
-
-#acronyms:hover ~ #peech{
-animation: fadeIn 3s ease-in-out;
-display: block;
-position: absolute;
-top: 5.35%;
-left: 59.5%;
+#acronyms:hover #peech{
+animation: fadeIn 2s ease-in-out;
+display: inline;
 }
 
 #ext, #o, #peech {
-display: none;
-pointer-events: none; /* Prevent interaction initially */
+    margin-right: 10px;
+    display: none;
+    pointer-events: none; /* Prevent interaction initially */
 }
 
 /* Add this class when animation ends */
