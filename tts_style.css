@@ -57,20 +57,20 @@ text-align: center;
 }
 
 #acronyms:hover{
-    animation: fadeIn 2s ease-in-out;
+    animation: fadeIn 1.25s ease-in-out;
 }
 #acronyms:hover #ext{
-animation: fadeIn 2s ease-in-out;
+animation: fadeIn 1.25s ease-in-out;
 display:inline;
 }
 
 #acronyms:hover #o{
-animation: fadeIn 2s ease-in-out;
+animation: fadeIn 1.25s ease-in-out;
 display: inline;
 }
 
 #acronyms:hover #peech{
-animation: fadeIn 2s ease-in-out;
+animation: fadeIn 1.25s ease-in-out;
 display: inline;
 }
 
