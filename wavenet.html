@@ -7,7 +7,7 @@
     <style>
         /* General Styles */
         body {
-            background-color: #121212;
+            background: linear-gradient(135deg, #121212 0%, #1a1a1a 100%);
             color: #E0E0E0;
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             margin: 0;
@@ -41,7 +41,12 @@
 
         /* Section Styles */
         .section {
+            transition: transform 0.3s ease;
             margin-bottom: 40px;
+        }
+
+        .section:hover {
+            transform: translateY(-5px); /*texto alza */
         }
 
         h2 {
@@ -91,6 +96,180 @@
             width: 80px;
             margin: 20px;
         }  
+        .tooltip {
+            position: relative;
+            display: inline-block;
+            color: #FFD369;
+            font-weight: bold;
+            cursor: pointer;
+            }
+
+        .tooltip-text {
+            visibility: hidden;
+            background-color: #333;
+            color: #fff;
+            text-align: left;
+            padding: 5px 10px;
+            border-radius: 5px;
+            position: absolute;
+            z-index: 1;
+            bottom: 125%; /* Aparece arriba del texto */
+            left: 50%;
+            transform: translateX(-50%);
+            opacity: 0;
+            transition: opacity 0.3s;
+            white-space: nowrap;
+            }
+
+        .tooltip:hover .tooltip-text {
+            visibility: visible;
+            opacity: 1;
+            }
+
+    /* Estilos para las tarjetas */
+    .card {
+        background: #1e1e1e;
+        border-radius: 12px;
+        padding: 25px;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+        margin-bottom: 30px;
+        border-left: 4px solid #c87100;
+        transition: all 0.3s ease;
+        position: relative;
+        overflow: hidden;
+    }
+
+    .card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+    }
+
+    .card::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(135deg, rgba(200, 113, 0, 0.1) 0%, transparent 100%);
+        z-index: 0;
+    }
+
+    .card-content {
+        position: relative;
+        z-index: 1;
+    }
+
+    .card h2 {
+        border-bottom: none;
+        padding-bottom: 0;
+        margin-bottom: 15px;
+        color: #FFD369;
+        font-size: 28px;
+    }
+
+    /* Efecto para listas dentro de tarjetas */
+    .card ul {
+        padding-left: 25px;
+    }
+
+    .card li {
+        margin-bottom: 12px;
+        position: relative;
+    }
+
+    .card li::before {
+        content: '•';
+        color: #c87100;
+        font-weight: bold;
+        display: inline-block;
+        width: 1em;
+        margin-left: -1em;
+    }
+
+    .audio-demo-container {
+        background: #1a1a1a;
+        padding: 20px;
+        border-radius: 10px;
+        margin-top: 20px;
+    }
+
+    .sample-selector {
+        margin-bottom: 20px;
+    }
+
+    .sample-selector select {
+        background: #2a2a2a;
+        color: white;
+        border: 1px solid #c87100;
+        padding: 8px;
+        border-radius: 5px;
+        margin-left: 10px;
+    }
+
+    .comparison-container {
+        display: flex;
+        gap: 30px;
+        margin-bottom: 20px;
+    }
+
+    .audio-player {
+        flex: 1;
+        background: #252525;
+        padding: 15px;
+        border-radius: 8px;
+    }
+
+    .audio-player h3 {
+        color: #FFD369;
+        margin-top: 0;
+        text-align: center;
+    }
+
+    .waveform {
+        height: 100px;
+        background: #121212;
+        margin-top: 10px;
+        border-radius: 5px;
+    }
+
+    .audio-comparison {
+    display: flex;
+    gap: 20px;
+    margin-top: 20px;
+    flex-wrap: wrap;
+    }
+
+    .audio-sample {
+        flex: 1;
+        min-width: 250px;
+        background: #1e1e1e;
+        padding: 15px;
+        border-radius: 8px;
+        border-left: 3px solid #c87100;
+    }
+
+    .audio-player {
+        width: 100%;
+        margin: 10px 0;
+    }
+
+    .audio-description {
+        font-size: 14px;
+        color: #BBBBBB;
+        margin-top: 5px;
+        font-style: italic;
+    }
+
+    /* Estilos para los controles nativos de audio */
+    audio::-webkit-media-controls-panel {
+        background-color: #2a2a2a;
+    }
+
+    audio::-webkit-media-controls-play-button,
+    audio::-webkit-media-controls-mute-button {
+        filter: invert(80%);
+    }
     </style>
 </head>
 <body>
@@ -103,11 +282,13 @@
 
         <img id="back_button" src="img/ev_1/home.png">
 
-        <section class="section">
+        <section class="card">
             <h2>¿Qué es?</h2>
-            <p>
-                WaveNet es un modelo generativo autoregresivo desarrollado por DeepMind que produce directamente ondas de audio crudas (*raw waveforms*). A diferencia de los métodos tradicionales que utilizan concatenación o vocoders paramétricos, WaveNet genera audio muestra por muestra, modelando su distribución probabilística condicional de forma precisa.
-            </p>
+            <div class="card-content">
+                <p>
+                    WaveNet es un modelo generativo autoregresivo desarrollado por DeepMind que produce directamente ondas de audio crudas (*raw waveforms*). A diferencia de los métodos tradicionales que utilizan concatenación o vocoders paramétricos, WaveNet genera audio muestra por muestra, modelando su distribución probabilística condicional de forma precisa.
+                </p>
+            </div>
         </section>
 
         <section class="section">
@@ -116,14 +297,34 @@
                 Para preservar la direccionalidad temporal (pasado → futuro), WaveNet emplea <span class="highlight">convoluciones causales</span>. Estas aseguran que cada predicción solo dependa del presente y el pasado, nunca del futuro.
             </p>
             <p>
-                Sin embargo, una sola capa de convolución causal tiene un contexto limitado. Para remediar esto, se utilizan <span class="highlight">convoluciones dilatadas</span>, que expanden el campo receptivo de la red exponencialmente sin incrementar drásticamente los parámetros.
+                Sin embargo, una sola capa de <span class="tooltip">convolución<span class="tooltip-text">Operación que se aplica sobre datos (como imágenes, señales de audio o texto) para extraer patrones locales.</span></span> causal tiene un contexto limitado. Para remediar esto, se utilizan <span class="highlight">convoluciones dilatadas</span>, que expanden el campo receptivo de la red exponencialmente sin incrementar drásticamente los parámetros.
             </p>
+            
+            <img id="wavenet1" src="img/ev_1/wavenet_2.gif">
+            <img id="wavenet2" src="img/ev_1/wavenet.gif">
+            
+            <p>Por otro lado tenemos la <span class="tooltip">dilatación<span class="tooltip-text"><img id="dilatación" style="width: 400px;"  src="img/ev_1/dilatacion.jpg"></span></span> que permite que la red tenga más contexto que con una convolución normal. Es similar a las convoluciones de agrupamiento o estriadas, pero la salida tiene el mismo tamaño que la entrada.</p>
+            
         </section>
 
         <section class="section">
             <h2>Distribuciones Softmax</h2>
             <p>
-                Para predecir la siguiente muestra de audio, WaveNet utiliza una capa de clasificación <span class="highlight">Softmax</span> sobre los posibles niveles cuantizados. Las muestras de audio se transforman usando la compresión no lineal <span class="highlight">µ-law</span>, mejorando la resolución para valores pequeños y reduciendo la amplitud de las variaciones.
+                Para modelar la distribución de convoluciones causales dilatadas <span class="tooltip">(Distribución Condicional)</span> usamos la función Softmax ya que puede manejar una gran cantidad de posibles valores de salida y es lo suficientemente flexible para capturar la complejidad de las señales de audio.
+            </p>
+            <p>
+                Antes de aplicar la función Softmax, los valores de audio se transforman utilizando la µ-law (ley A), dónde μ = 255. Después de aplicar µ-law, los valores de audio transformados se cuantizan y en el caso de WaveNet, se cuantiza con 256 niveles.
+            </p>
+            <p>
+                Después de cuantizar la señal de audio, cada valor cuantizado representa un nivel diferente. La función Softmax convierte los logits (valores de entrada) en probabilidades para cada uno de los niveles. La función asegura que la suma de todas las probabilidades sea igual a 1, permitiendo interpretar los valores como probabilidades de pertenencia a cada uno de los 256 niveles.
+            </p>
+            <div style="text-align: center;justify-content: center;">
+            <img src="img/ev_1/wavenet_3.png">
+            </div>
+            <p>
+                Si el nivel 80 tiene una probabilidad de 0.04, esto significa que, según la función Softmax, la probabilidad de que la siguiente muestra de audio sea cuantizada al nivel 80 es del 4%.
+En otras palabras, de todas los posibles niveles cuantizados, el nivel 80 tiene una probabilidad del 4% de ser el valor de la siguiente muestra de audio.
+
             </p>
         </section>
 
@@ -147,10 +348,48 @@
         </section>
 
     </div>
-
+    
+    <section class="card">
+        <h2>Demo Interactiva: Comparación de Técnicas</h2>
+        <div class="audio-comparison">
+            <!-- WaveNet -->
+            <div class="audio-sample">
+                <h3>WaveNet (Generativo)</h3>
+                <audio controls class="audio-player">
+                    <source src="audios/us-english-wavenet-1.wav" type="audio/mpeg">
+                    Tu navegador no soporta el elemento de audio.
+                </audio>
+                <p class="audio-description">Audio generado por modelo WaveNet de DeepMind</p>
+            </div>
+            
+            <!-- Concatenativo -->
+            <div class="audio-sample">
+                <h3>Concatenativo (Tradicional)</h3>
+                <audio controls class="audio-player">
+                    <source src="audios/us-english-concatenative-1.wav" type="audio/mpeg">
+                    Tu navegador no soporta el elemento de audio.
+                </audio>
+                <p class="audio-description">Audio generado por método concatenativo tradicional</p>
+            </div>
+        </div>
+    </section>
 </body>
 
 <script>
+        document.addEventListener('DOMContentLoaded', function() {
+    // Pausar el otro audio cuando uno se reproduce
+    const audioPlayers = document.querySelectorAll('.audio-player');
+    
+    audioPlayers.forEach(player => {
+        player.addEventListener('play', function() {
+            audioPlayers.forEach(otherPlayer => {
+                if (otherPlayer !== player) {
+                    otherPlayer.pause();
+                }
+            });
+        });
+    });
+});
         document.addEventListener("DOMContentLoaded", function () {
         // Back button functionality to go to page_1.html
         const backButton = document.getElementById("back_button");
