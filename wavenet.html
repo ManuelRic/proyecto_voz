@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WaveNet - DeepMind</title>
+    <style>
+        /* General Styles */
+        body {
+            background-color: #121212;
+            color: #E0E0E0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        /* Header Styles */
+        header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        h1 {
+            font-size: 48px;
+            color: #c87100;
+            margin-bottom: 10px;
+        }
+
+        .subtitle {
+            font-size: 20px;
+            color: #BBBBBB;
+            font-weight: 400;
+            margin-top: 0;
+        }
+
+        /* Section Styles */
+        .section {
+            margin-bottom: 40px;
+        }
+
+        h2 {
+            font-size: 32px;
+            color: #FFD369;
+            border-bottom: 2px solid #c87100;
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+        }
+
+        p {
+            font-size: 18px;
+            line-height: 1.8;
+            color: #FFFFFF;
+            margin: 10px 0;
+        }
+
+        ul {
+            padding-left: 20px;
+            font-size: 18px;
+        }
+
+        li {
+            margin-bottom: 10px;
+        }
+
+        /* Highlight Styles */
+        .highlight {
+            color: #FFD369;
+            font-weight: bold;
+        }
+
+        /* Footer Styles */
+        footer {
+            text-align: center;
+            margin-top: 40px;
+            font-size: 14px;
+            color: #BBBBBB;
+        }
+
+        #back_button{
+            cursor: pointer;
+            position: absolute;
+            top: 0;
+            left: 0;
+            filter: invert(100%);
+            width: 80px;
+            margin: 20px;
+        }  
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <header>
+            <h1>WaveNet</h1>
+            <p class="subtitle">Modelo generativo autoregresivo para la síntesis de audio realista</p>
+        </header>
+
+        <img id="back_button" src="img/ev_1/home.png">
+
+        <section class="section">
+            <h2>¿Qué es?</h2>
+            <p>
+                WaveNet es un modelo generativo autoregresivo desarrollado por DeepMind que produce directamente ondas de audio crudas (*raw waveforms*). A diferencia de los métodos tradicionales que utilizan concatenación o vocoders paramétricos, WaveNet genera audio muestra por muestra, modelando su distribución probabilística condicional de forma precisa.
+            </p>
+        </section>
+
+        <section class="section">
+            <h2>Convoluciones Causales Dilatadas</h2>
+            <p>
+                Para preservar la direccionalidad temporal (pasado → futuro), WaveNet emplea <span class="highlight">convoluciones causales</span>. Estas aseguran que cada predicción solo dependa del presente y el pasado, nunca del futuro.
+            </p>
+            <p>
+                Sin embargo, una sola capa de convolución causal tiene un contexto limitado. Para remediar esto, se utilizan <span class="highlight">convoluciones dilatadas</span>, que expanden el campo receptivo de la red exponencialmente sin incrementar drásticamente los parámetros.
+            </p>
+        </section>
+
+        <section class="section">
+            <h2>Distribuciones Softmax</h2>
+            <p>
+                Para predecir la siguiente muestra de audio, WaveNet utiliza una capa de clasificación <span class="highlight">Softmax</span> sobre los posibles niveles cuantizados. Las muestras de audio se transforman usando la compresión no lineal <span class="highlight">µ-law</span>, mejorando la resolución para valores pequeños y reduciendo la amplitud de las variaciones.
+            </p>
+        </section>
+
+        <section class="section">
+            <h2>Gated Activation Units</h2>
+            <p>
+                Las <span class="highlight">Gated Activation Units (GAUs)</span> permiten controlar cuánto de la información entra y sale de cada capa de la red. Esto ayuda a WaveNet a modelar patrones complejos en el audio y previene el problema del desvanecimiento de gradientes en redes profundas.
+            </p>
+        </section>
+
+        <section class="section">
+            <h2>Redes de Ondas Condicionales</h2>
+            <p>
+                WaveNet puede ser extendido para generar audio condicionado a diferentes tipos de entradas. Estas <span class="highlight">redes de ondas condicionales</span> permiten que el modelo produzca diferentes resultados basados en contexto adicional.
+            </p>
+            <ul>
+                <li><b>Texto</b>: Condicionamiento con embeddings de texto para síntesis de voz (TTS).</li>
+                <li><b>Altavoz</b>: Embeddings del hablante para personalizar la voz generada.</li>
+                <li><b>Etiquetas musicales</b>: Para generar música específica por género o instrumento.</li>
+            </ul>
+        </section>
+
+    </div>
+
+</body>
+
+<script>
+        document.addEventListener("DOMContentLoaded", function () {
+        // Back button functionality to go to page_1.html
+        const backButton = document.getElementById("back_button");
+
+        backButton.addEventListener("click", function() {
+            window.location.href = "page_1.html";  // Redirect to page_1.html
+        });
+    });
+</script>
+</html>
