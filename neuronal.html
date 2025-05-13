@@ -13,33 +13,25 @@
       font-family: 'CalSans', sans-serif;
     }
     
-    body {
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      background: #121212;
-      color: #333;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      height: 100vh;
-      margin: 0;
-    }
+  body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: #121212;
+    color: #333;
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Centers horizontally */
+    justify-content: flex-start; /* Aligns items to the top */
+    height: 100vh;
+    margin: 0;
+  }
 
-    h2 {
-      margin-bottom: 20px;
-      color: #c87100;
-    }
+  h1 {
+    color: #c87100;
+    text-align: center; /* Ensures text is centered horizontally */
+    margin: 40px;
+    margin-bottom: 10%;
+  }
 
-    textarea {
-      width: 90%;
-      max-width: 600px;
-      padding: 15px;
-      font-size: 16px;
-      border: 2px solid #ccc;
-      border-radius: 10px;
-      resize: vertical;
-      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
-    }
 
     button {
       width: 33%;
@@ -97,6 +89,26 @@
       animation: popUp 0.3s ease-out;
     }
 
+    label {
+      font-size: 22px;
+      color: #c87100;
+      margin-bottom: 5px;
+      font-weight: bold;
+      display: block;
+    }
+
+    textarea {
+      margin: 35px;
+      width: 90%;
+      max-width: 600px;
+      padding: 15px;
+      font-size: 16px;
+      border: 2px solid #ccc;
+      border-radius: 10px;
+      resize: vertical;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+    }
+
     @keyframes popUp {
       from {
         opacity: 0;
@@ -113,7 +125,9 @@
   </style>
 </head>
 <body>
-  <h2>🗣️ TTS Neuronal</h2>
+  <h1>🗣️ TTS Neuronal</h1>
+
+  <label for="text-input">Introduzca su texto:</label>
   <textarea id="text-input" rows="4" cols="50">¿Qué tal? Si quieres puedes introducir tu propio texto, esta IA está diseñada para hablar en inglés.</textarea><br>
   
   <p id="recomendacion">Recomendación: Emplea exclamaciones (!) e interrogantes (?) en tus frases para apreciar mejor el avance del TTS neuronal. Incluso puedes usar varias a la vez.</p>

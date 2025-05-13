@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Demo TTS Concatenativo</title>
+</head>
+<style>
+  @font-face {
+    font-family: 'CalSans';
+    src: url('fonts/CalSans-Regular.ttf') format('truetype');
+  }
+
+  body{
+      background-color: #121212;
+      /*background-image: url('img/ev_1/bg1.png');*/
+      font-family: 'CalSans', sans-serif;
+  }
+
+  h1 {
+    text-align: center;
+    color: #c87100;
+    padding: 0;
+    margin-top: 10%;
+  }
+
+  textarea{
+    margin: 50px;
+  }
+
+  .ta_container {
+    display: flex;
+    justify-content: center; /* center horizontally */
+  }
+
+  #play-button {
+    display: block;
+    margin: 0 auto;
+    font-family: 'CalSans', sans-serif;
+    color: rgb(255, 255, 255);
+    background-color: #7e5929;
+    padding: 12px 20px;
+    font-size: 16px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    width:fit-content;
+    margin-top: 20px;
+  }
+
+  #back_button{
+    cursor: pointer;
+    position: absolute;
+    top: 0;
+    left: 0;
+    filter: invert(90%);
+    width: 80px;
+    margin: 20px;
+  }
+
+  #back_button:hover{
+    filter: invert(80%);
+  }
+</style>
+<body>
+  <h1>Texto a Voz Concatenativo</h1>
+
+  <a href="page_1.html">
+    <img id="back_button" src="img/ev_1/home.png" alt="Back">
+  </a>
+
+  <div class="ta_container">
+      <textarea id="text-input" rows="4" cols="50">Me llamo Paco</textarea><br>
+  </div>
+
+  <button id="play-button">Reproducir</button>
+
+  <script type="module">
+    import TextToSpeech from './main.js';
+
+    const tts = new TextToSpeech({ debug: true });
+
+    document.getElementById('play-button').addEventListener('click', async () => {
+      const text = document.getElementById('text-input').value;
+      await tts.textToSpeech(text);
+    });
+  </script>
+</body>
+</html>
