@@ -153,21 +153,7 @@ li{
     visibility: hidden;
 }
 
-#test_button_p {
-    font-family: 'CalSans', sans-serif;
-    margin-left: 20%;
-    color: rgb(255, 255, 255);
-    background-color: #7e5929;
-    padding: 12px 20px;
-    font-size: 16px;
-    border: none;
-    border-radius: 6px;
-    cursor: pointer;
-    width:fit-content;
-    margin-top: 20px;
-}
-
-#test_button_n {
+#test_button_n, #test_button_p, #test_button_c {
     font-family: 'CalSans', sans-serif;
     margin-left: 20%;
     color: rgb(255, 255, 255);
@@ -252,28 +238,6 @@ li{
 }
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 .visible {
     display: inline-block;
     transition: transform 1s ease-in-out;
@@ -341,4 +305,20 @@ h1 {
     margin: 0;
     display: flex; /* Use flex to make children align inline */
     position: relative;
+}
+
+@media (max-width: 890px) {
+  #tts_container:hover #t1,
+  #tts_container:hover #t2,
+  #tts_container:hover #t3 {
+    transform: none !important;
+  }
+
+  #tts_container:hover #a1,
+  #tts_container:hover #a2,
+  #tts_container:hover #a3 {
+    opacity: 0 !important;
+    transform: none !important;
+    transition: none !important;
+  }
 }

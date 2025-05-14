@@ -57,6 +57,14 @@ let cursorHidden = false;
 
 
 // __________________________
+document.addEventListener("DOMContentLoaded", function () {
+  const testButton = document.getElementById("test_button_c");
+
+  // Redirect to the TTS page when the "¡Pruébalo!" button is clicked
+  testButton.addEventListener("click", function() {
+      window.location.href = "concatenativa.html";  // Replace with the URL of your TTS page
+  });
+});
 
 document.addEventListener("DOMContentLoaded", function () {
   const testButton = document.getElementById("test_button_p");
@@ -96,14 +104,5 @@ img.addEventListener('mouseleave', () => {
     images.forEach(other => {
     other.classList.remove('shrink', 'grow');
     });
-});
-});
-
-const animatedElements = ['ext', 'o', 'peech'];
-
-animatedElements.forEach(id => {
-const el = document.getElementById(id);
-el.addEventListener('animationend', () => {
-    el.classList.add('interactable');
 });
 });

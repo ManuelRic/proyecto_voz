@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <link rel="icon" href="img/ev_1/logo.png" type="image/x-icon">
   <meta charset="UTF-8">
   <title>TTS Demo</title>
   <style>
@@ -16,14 +17,15 @@
     
     body {
       background-color: #121212;
-      padding: 40px;
       display: flex;
       flex-direction: column;
       align-items: center;
     }
 
-    h2 {
+    h1 {
       color: #c87100;
+      margin-bottom: 50px;
+      text-align: center; /* Ensures text is centered horizontally */
     }
 
     .tts-container {
@@ -36,12 +38,13 @@
 
     textarea {
       width: 100%;
-      padding: 10px;
+      max-width: 600px;
+      padding: 15px;
       font-size: 16px;
-      border-radius: 6px;
-      border: 1px solid #ccc;
+      border: 2px solid #ccc;
+      border-radius: 10px;
       resize: vertical;
-      margin-bottom: 15px;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
     }
 
     #voiceSelect{
@@ -50,11 +53,12 @@
     }
 
     label {
+      display: block;
       font-size: 22px;
       color: #c87100;
-      display: block;
-      margin: 10px 0 5px;
       font-weight: bold;
+      margin-bottom: 10px;
+      margin-top: 15px;
     }
 
     select, input[type="range"] {
@@ -152,13 +156,15 @@
 </head>
 <body>
 
-  <h2>🗣️ TTS Paramétrica</h2>
+  <h1>🗣️ TTS Paramétrica</h1>
   <div class="tts-container">
     <label for="text">Introduzca su texto:</label>
     <textarea id="text" rows="4">Escucha este mismo texto o redacta el tuyo propio.</textarea>
 
     <label for="voiceSelect">Elegir Voz:</label>
+    <br>
     <select id="voiceSelect"></select>
+    <br>
 
     <label for="rate">Velocidad:</label>
     <input type="range" id="rate" min="0" max="2" step="0.01" value="1">
