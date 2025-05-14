@@ -36,50 +36,6 @@ p{
     margin-bottom: 70px;
 }
 
-h1 {
-    color: #c87100;
-    padding: 0;
-    margin: 0;
-}
-
-@keyframes fadeIn {
-    0%,50%{
-        opacity: 0;
-    }
-    100% {
-        opacity: 1;
-    }
-}
-
-#acronyms{
-font-size: 90px;
-text-align: center;
-}
-
-#acronyms:hover{
-    animation: fadeIn 1.25s ease-in-out;
-}
-#acronyms:hover #ext{
-animation: fadeIn 1.25s ease-in-out;
-display:inline;
-}
-
-#acronyms:hover #o{
-animation: fadeIn 1.25s ease-in-out;
-display: inline;
-}
-
-#acronyms:hover #peech{
-animation: fadeIn 1.25s ease-in-out;
-display: inline;
-}
-
-#ext, #o, #peech {
-    margin-right: 10px;
-    display: none;
-    pointer-events: none; /* Prevent interaction initially */
-}
-
 /* Add this class when animation ends */
 .interactable {
 pointer-events: auto;
@@ -293,4 +249,96 @@ li{
 /* Show submenu on hover */
 .submenu-container:hover .submenu {
     display: flex;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.visible {
+    display: inline-block;
+    transition: transform 1s ease-in-out;
+    position: relative;
+}
+
+.appear {
+    display: inline-block;
+    opacity: 0;
+    position: absolute;
+    left: 0;
+    top: 0;
+    pointer-events: none;
+    transition: transform 1s ease-in-out, opacity 1s ease-in-out;
+}
+
+/* Move visible letters on hover */
+#tts_container:hover #t1 {
+    transform: translateX(-21vw); /* Move T to the left */
+}
+
+#tts_container:hover #t2 {
+    transform: translateX(-7vw);  /* Move T to the center */
+}
+
+#tts_container:hover #t3 {
+    transform: translateX(2.5vw); /* Move S to the right */
+}
+
+/* Appear fade in with transition synchronized */
+#tts_container:hover #a1 {
+    opacity: 1;
+    transform: translateX(-17.5vw); /* Match position of #t1 */
+    transition: opacity 1s ease-in 1.5s, transform 1s ease-in-out; /* Delay opacity */
+}
+
+#tts_container:hover #a2 {
+    opacity: 1;
+    transform: translateX(-4.5vw);  /* Match position of #t2 */
+    transition: opacity 1s ease-in 1.5s, transform 1s ease-in-out; /* Delay opacity */
+}
+
+#tts_container:hover #a3 {
+    opacity: 1;
+    transform: translateX(7vw); /* Match position of #t3 */
+    transition: opacity 1s ease-in 1.5s, transform 1s ease-in-out; /* Delay opacity */
+}
+
+.pair {
+    display: inline-block;
+    position: relative;
+}
+
+#tts_container {
+    text-align: center; /* Center the inline-block child */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+h1 {
+    font-size: 100px;
+    color: #c87100;
+    padding: 0;
+    margin: 0;
+    display: flex; /* Use flex to make children align inline */
+    position: relative;
 }

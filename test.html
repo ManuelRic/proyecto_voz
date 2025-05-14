@@ -1,0 +1,106 @@
+<style>
+  @font-face {
+    font-family: 'CalSans';
+    src: url('fonts/CalSans-Regular.ttf') format('truetype');
+  }
+
+  body {
+    background-color: #121212;
+    font-family: 'CalSans', sans-serif;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100vw;
+    height: 100vh; /* Make body take full height for vertical centering */
+  }
+
+  #tts_container {
+    text-align: center; /* Center the inline-block child */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  h1 {
+    font-size: 100px;
+    color: #c87100;
+    padding: 0;
+    margin: 0;
+    display: flex; /* Use flex to make children align inline */
+    position: relative;
+  }
+
+  .visible {
+    display: inline-block;
+    transition: transform 1s ease-in-out;
+    position: relative;
+  }
+
+  .appear {
+    display: inline-block;
+    opacity: 0;
+    position: absolute;
+    left: 0;
+    top: 0;
+    pointer-events: none;
+    transition: transform 1s ease-in-out, opacity 1s ease-in-out;
+  }
+
+  /* Move visible letters on hover */
+  #tts_container:hover #t1 {
+    transform: translateX(-16vw); /* Move T to the left */
+  }
+
+  #tts_container:hover #t2 {
+    transform: translateX(-2vw);  /* Move T to the center */
+  }
+
+  #tts_container:hover #t3 {
+    transform: translateX(7.5vw); /* Move S to the right */
+  }
+
+  /* Appear fade in with transition synchronized */
+  #tts_container:hover #a1 {
+    opacity: 1;
+    transform: translateX(-12.5vw); /* Match position of #t1 */
+    transition: opacity 1s ease-in 1.5s, transform 1s ease-in-out; /* Delay opacity */
+  }
+
+  #tts_container:hover #a2 {
+    opacity: 1;
+    transform: translateX(1.5vw);  /* Match position of #t2 */
+    transition: opacity 1s ease-in 1.5s, transform 1s ease-in-out; /* Delay opacity */
+  }
+
+  #tts_container:hover #a3 {
+    opacity: 1;
+    transform: translateX(12vw); /* Match position of #t3 */
+    transition: opacity 1s ease-in 1.5s, transform 1s ease-in-out; /* Delay opacity */
+  }
+
+  .pair {
+    display: inline-block;
+    position: relative;
+  }
+</style>
+
+<div id="tts_container">
+  <div class="text-wrapper">
+    <h1>
+      <span class="pair">
+        <span class="visible" id="t1">T</span>
+        <span class="appear" id="a1">ext </span>
+      </span>
+      <span class="pair">
+        <span class="visible" id="t2">T</span>
+        <span class="appear" id="a2">o </span>
+      </span>
+      <span class="pair">
+        <span class="visible" id="t3">S</span>
+        <span class="appear" id="a3">peech</span>
+      </span>
+    </h1>
+  </div>
+</div>
