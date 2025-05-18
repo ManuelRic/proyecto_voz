@@ -6,7 +6,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>WaveNet - DeepMind</title>
     <style>
-        /* General Styles */
         body {
             background: linear-gradient(135deg, #121212 0%, #1a1a1a 100%);
             color: #E0E0E0;
@@ -21,7 +20,6 @@
             padding: 20px;
         }
 
-        /* Header Styles */
         header {
             text-align: center;
             margin-bottom: 40px;
@@ -40,14 +38,13 @@
             margin-top: 0;
         }
 
-        /* Section Styles */
-        .section {
-            transition: transform 0.3s ease;
+        .section, .card {
             margin-bottom: 40px;
+            transition: transform 0.3s ease;
         }
 
-        .section:hover {
-            transform: translateY(-5px); /*texto alza */
+        .section:hover, .card:hover {
+            transform: translateY(-5px);
         }
 
         h2 {
@@ -58,7 +55,7 @@
             margin-bottom: 20px;
         }
 
-        p {
+        p, ul {
             font-size: 18px;
             line-height: 1.8;
             color: #FFFFFF;
@@ -67,20 +64,17 @@
 
         ul {
             padding-left: 20px;
-            font-size: 18px;
         }
 
         li {
             margin-bottom: 10px;
         }
 
-        /* Highlight Styles */
         .highlight {
             color: #FFD369;
             font-weight: bold;
         }
 
-        /* Footer Styles */
         footer {
             text-align: center;
             margin-top: 40px;
@@ -101,181 +95,119 @@
         #back_button:hover{
             filter: invert(80%);
         }
-        
+
         .tooltip {
             position: relative;
             display: inline-block;
             color: #FFD369;
             font-weight: bold;
             cursor: pointer;
-            }
+        }
 
         .tooltip-text {
             visibility: hidden;
             background-color: #333;
             color: #fff;
-            text-align: left;
+            text-align: center;
             padding: 5px 10px;
             border-radius: 5px;
             position: absolute;
             z-index: 1;
-            bottom: 125%; /* Aparece arriba del texto */
+            bottom: 125%;
             left: 50%;
             transform: translateX(-50%);
             opacity: 0;
             transition: opacity 0.3s;
             white-space: nowrap;
-            }
+            max-width: 90vw;
+            overflow-wrap: break-word;
+            box-sizing: border-box;
+        }
 
         .tooltip:hover .tooltip-text {
             visibility: visible;
             opacity: 1;
-            }
+        }
 
-    /* Estilos para las tarjetas */
-    .card {
-        background: #1e1e1e;
-        border-radius: 12px;
-        padding: 25px;
-        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
-        margin-bottom: 30px;
-        border-left: 4px solid #c87100;
-        transition: all 0.3s ease;
-        position: relative;
-        overflow: hidden;
-    }
+        .card {
+            background: #1e1e1e;
+            border-radius: 12px;
+            padding: 25px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+            border-left: 4px solid #c87100;
+            position: relative;
+            overflow: hidden;
+        }
 
-    .card:hover {
-        transform: translateY(-5px);
-        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
-    }
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(200, 113, 0, 0.1) 0%, transparent 100%);
+            z-index: 0;
+        }
 
-    .card::before {
-        content: '';
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background: linear-gradient(135deg, rgba(200, 113, 0, 0.1) 0%, transparent 100%);
-        z-index: 0;
-    }
+        .card-content {
+            position: relative;
+            z-index: 1;
+        }
 
-    .card-content {
-        position: relative;
-        z-index: 1;
-    }
+        .card h2 {
+            border-bottom: none;
+            padding-bottom: 0;
+            margin-bottom: 15px;
+            color: #FFD369;
+            font-size: 28px;
+        }
 
-    .card h2 {
-        border-bottom: none;
-        padding-bottom: 0;
-        margin-bottom: 15px;
-        color: #FFD369;
-        font-size: 28px;
-    }
+        .card li::before {
+            content: '•';
+            color: #c87100;
+            font-weight: bold;
+            display: inline-block;
+            width: 1em;
+            margin-left: -1em;
+        }
 
-    /* Efecto para listas dentro de tarjetas */
-    .card ul {
-        padding-left: 25px;
-    }
+        .audio-comparison {
+            display: flex;
+            gap: 20px;
+            margin-top: 20px;
+            flex-wrap: wrap;
+        }
 
-    .card li {
-        margin-bottom: 12px;
-        position: relative;
-    }
+        .audio-sample {
+            flex: 1;
+            min-width: 250px;
+            background: #1e1e1e;
+            padding: 15px;
+            border-radius: 8px;
+            border-left: 3px solid #c87100;
+        }
 
-    .card li::before {
-        content: '•';
-        color: #c87100;
-        font-weight: bold;
-        display: inline-block;
-        width: 1em;
-        margin-left: -1em;
-    }
+        .audio-player {
+            width: 100%;
+            margin: 10px 0;
+        }
 
-    .audio-demo-container {
-        background: #1a1a1a;
-        padding: 20px;
-        border-radius: 10px;
-        margin-top: 20px;
-    }
+        .audio-description {
+            font-size: 14px;
+            color: #BBBBBB;
+            margin-top: 5px;
+            font-style: italic;
+        }
 
-    .sample-selector {
-        margin-bottom: 20px;
-    }
+        audio::-webkit-media-controls-panel {
+            background-color: #2a2a2a;
+        }
 
-    .sample-selector select {
-        background: #2a2a2a;
-        color: white;
-        border: 1px solid #c87100;
-        padding: 8px;
-        border-radius: 5px;
-        margin-left: 10px;
-    }
-
-    .comparison-container {
-        display: flex;
-        gap: 30px;
-        margin-bottom: 20px;
-    }
-
-    .audio-player {
-        flex: 1;
-        background: #252525;
-        padding: 15px;
-        border-radius: 8px;
-    }
-
-    .audio-player h3 {
-        color: #FFD369;
-        margin-top: 0;
-        text-align: center;
-    }
-
-    .waveform {
-        height: 100px;
-        background: #121212;
-        margin-top: 10px;
-        border-radius: 5px;
-    }
-
-    .audio-comparison {
-    display: flex;
-    gap: 20px;
-    margin-top: 20px;
-    flex-wrap: wrap;
-    }
-
-    .audio-sample {
-        flex: 1;
-        min-width: 250px;
-        background: #1e1e1e;
-        padding: 15px;
-        border-radius: 8px;
-        border-left: 3px solid #c87100;
-    }
-
-    .audio-player {
-        width: 100%;
-        margin: 10px 0;
-    }
-
-    .audio-description {
-        font-size: 14px;
-        color: #BBBBBB;
-        margin-top: 5px;
-        font-style: italic;
-    }
-
-    /* Estilos para los controles nativos de audio */
-    audio::-webkit-media-controls-panel {
-        background-color: #2a2a2a;
-    }
-
-    audio::-webkit-media-controls-play-button,
-    audio::-webkit-media-controls-mute-button {
-        filter: invert(80%);
-    }
+        audio::-webkit-media-controls-play-button,
+        audio::-webkit-media-controls-mute-button {
+            filter: invert(80%);
+        }
     </style>
 </head>
 <body>
@@ -303,7 +235,7 @@
                 Para preservar la direccionalidad temporal (pasado → futuro), WaveNet emplea <span class="highlight">convoluciones causales</span>. Estas aseguran que cada predicción solo dependa del presente y el pasado, nunca del futuro.
             </p>
             <p>
-                Sin embargo, una sola capa de <span class="tooltip">convolución<span class="tooltip-text">Operación que se aplica sobre datos (como imágenes, señales de audio o texto) para extraer patrones locales.</span></span> causal tiene un contexto limitado. Para remediar esto, se utilizan <span class="highlight">convoluciones dilatadas</span>, que expanden el campo receptivo de la red exponencialmente sin incrementar drásticamente los parámetros.
+                Sin embargo, una sola capa de <span class="tooltip"><i>convolución</i><span class="tooltip-text">Operación que se aplica sobre datos (como imágenes, señales de audio o texto) para extraer patrones locales.</span></span> causal tiene un contexto limitado. Para remediar esto, se utilizan <span class="highlight">convoluciones dilatadas</span>, que expanden el campo receptivo de la red exponencialmente sin incrementar drásticamente los parámetros.
             </p>
             
             <img id="wavenet1" src="img/ev_1/wavenet_2.gif">
@@ -334,26 +266,20 @@ En otras palabras, de todas los posibles niveles cuantizados, el nivel 80 tiene 
             </p>
         </section>
 
-        <section class="section">
-            <h2>Gated Activation Units</h2>
-            <p>
-                Las <span class="highlight">Gated Activation Units (GAUs)</span> permiten controlar cuánto de la información entra y sale de cada capa de la red. Esto ayuda a WaveNet a modelar patrones complejos en el audio y previene el problema del desvanecimiento de gradientes en redes profundas.
-            </p>
-        </section>
 
-        <section class="section">
-            <h2>Redes de Ondas Condicionales</h2>
-            <p>
-                WaveNet puede ser extendido para generar audio condicionado a diferentes tipos de entradas. Estas <span class="highlight">redes de ondas condicionales</span> permiten que el modelo produzca diferentes resultados basados en contexto adicional.
-            </p>
-            <ul>
-                <li><b>Texto</b>: Condicionamiento con embeddings de texto para síntesis de voz (TTS).</li>
-                <li><b>Altavoz</b>: Embeddings del hablante para personalizar la voz generada.</li>
-                <li><b>Etiquetas musicales</b>: Para generar música específica por género o instrumento.</li>
-            </ul>
-        </section>
+    <section class="section">
+        <h2>Redes de Ondas Condicionales</h2>
+        <p>
+            WaveNet puede ser extendido para generar audio condicionado a diferentes tipos de entradas. Estas <span class="highlight">redes de ondas condicionales</span> permiten que el modelo produzca diferentes resultados basados en contexto adicional.
+        </p>
+        <ul>
+            <li><b>Texto</b>: Condicionamiento con embeddings de texto para síntesis de voz (TTS).</li>
+            <li><b>Altavoz</b>: Embeddings del hablante para personalizar la voz generada.</li>
+            <li><b>Etiquetas musicales</b>: Para generar música específica por género o instrumento.</li>
+        </ul>
+    </section>
 
-    </div>
+</div>
     
     <section class="card">
         <h2>Demo Interactiva: Comparación de Técnicas</h2>
