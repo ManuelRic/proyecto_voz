@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Demo Spanish-F5 con archivo local</title>
+  <style>
+    textarea {
+      width: 100%;
+      max-width: 600px;
+      height: 80px;
+      font-size: 16px;
+    }
+  </style>
+</head>
+<body>
+    <h2>Síntesis de voz con Spanish-F5</h2>
+
+    <p>Sube un archivo de audio (.wav):</p>
+    <input type="file" id="audioInput" accept="audio/wav" />
+    <br><br>
+
+    <label>Texto original del audio:</label><br>
+    <textarea id="refText">Alejandro puede ser muy gilipollas a veces, pero cuando se calla la boca, podemos ser muchas veces felices. Sin embargo, es muy alto y tiene las tetas muy grandes.</textarea>
+    <br><br>
+
+    <label>Texto a generar:</label><br>
+    <textarea id="genText">Esto es una muestra de como trabaja nuestro texto a voz. Espero que te guste el resultado. Es recomendable usar audios de entre 20 y 30 segundos.</textarea>
+    <br><br>
+
+    <button id="sintetizar">Generar voz</button>
+
+    <!-- Script externo -->
+    <script type="module" src="voice_cloning.js"></script>
+
+    <br><br>
+    <h3>Audio generado:</h3>
+    <audio id="audioPlayer" controls style="display: none;"></audio>
+
+    <h3>Espectrograma:</h3>
+    <img id="spectrogram" alt="Espectrograma generado" style="display: none; max-width: 600px;">
+
+</body>
+</html>
