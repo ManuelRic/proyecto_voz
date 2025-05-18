@@ -224,7 +224,7 @@
             <h2>¿Qué es?</h2>
             <div class="card-content">
                 <p>
-                    WaveNet es un modelo generativo autoregresivo desarrollado por DeepMind que produce directamente ondas de audio crudas (*raw waveforms*). A diferencia de los métodos tradicionales que utilizan concatenación o vocoders paramétricos, WaveNet genera audio muestra por muestra, modelando su distribución probabilística condicional de forma precisa.
+                    WaveNet es un modelo generativo autoregresivo desarrollado por DeepMind que produce directamente ondas de audio crudas (*raw waveforms*). A diferencia de los métodos tradicionales que utilizan concatenación o vocoders paramétricos, WaveNet genera audio muestra por muestra, modelando su distribución probabilística condicional de forma precisa, es decir, es un modelo basado en la síntesis neuronal.
                 </p>
             </div>
         </section>
@@ -248,13 +248,22 @@
         <section class="section">
             <h2>Distribuciones Softmax</h2>
             <p>
-                Para modelar la distribución de convoluciones causales dilatadas <span class="tooltip">(Distribución Condicional)</span> usamos la función Softmax ya que puede manejar una gran cantidad de posibles valores de salida y es lo suficientemente flexible para capturar la complejidad de las señales de audio.
+                 La función softmax es una función matemática que convierte un vector de números reales en una distribución de probabilidad. 
+                 Es ampliamente utilizada en redes neuronales, especialmente en las capas de salida cuando se quiere modelar una variable categórica, 
+                 como en la generación de texto o audio donde hay que elegir el siguiente símbolo (por ejemplo, una muestra de audio cuantizada).
+                 Para modelar la distribución de convoluciones causales dilatadas <span class="tooltip">(Distribución Condicional)</span>
+                 usamos la función Softmax ya que puede manejar una gran cantidad de posibles valores de salida y es lo suficientemente flexible para 
+                 capturar la complejidad de las señales de audio. 
             </p>
             <p>
-                Antes de aplicar la función Softmax, los valores de audio se transforman utilizando la µ-law (ley A), dónde μ = 255. Después de aplicar µ-law, los valores de audio transformados se cuantizan y en el caso de WaveNet, se cuantiza con 256 niveles.
+                Antes de aplicar la función Softmax, los valores de audio se transforman utilizando la µ-law (ley A), dónde μ = 255. Después de aplicar µ-law,
+                 los valores de audio transformados se cuantizan y en el caso de WaveNet, se cuantiza con 256 niveles.
             </p>
             <p>
-                Después de cuantizar la señal de audio, cada valor cuantizado representa un nivel diferente. La función Softmax convierte los logits (valores de entrada) en probabilidades para cada uno de los niveles. La función asegura que la suma de todas las probabilidades sea igual a 1, permitiendo interpretar los valores como probabilidades de pertenencia a cada uno de los 256 niveles.
+                Después de cuantizar la señal de audio, cada valor cuantizado representa un nivel diferente. 
+                La función Softmax convierte los logits (valores de entrada) en probabilidades para cada uno de los niveles además se asegura
+                 que la suma de todas las probabilidades sea igual a 1, permitiendo interpretar los valores como probabilidades 
+                de pertenencia a cada uno de los 256 niveles.
             </p>
             <div style="text-align: center;justify-content: center;">
             <img src="img/ev_1/wavenet_3.png">
@@ -266,11 +275,29 @@ En otras palabras, de todas los posibles niveles cuantizados, el nivel 80 tiene 
             </p>
         </section>
 
+    <section class="section">
+        <h2>Context stacks</h2>
+        <p>
+            Los Context Stacks son una estructura complementaria que se añade encima del WaveNet principal para aumentar aún más su capacidad para capturar dependencias a largo plazo,
+            con ello logramos recordar y usar información de eventos pasados lejanos en el tiempo, cuando está generando o procesando una nueva parte de la señal.
+        </p>
+        <ul>
+            <li>Mantener coherencia en el tono.</li>
+            <li>Recordar dónde están las pausas.</li>
+            <li>Adaptar la entonación final como en una pregunta (en “¿cómo estás?”).</li>
+            <li>Usar un ritmo y prosodia natural desde el principio hasta el final.</li>
+        </ul>
+        <p>
+            Esto ayuda a que al haccer la narración del texto suene fluido sin y natural con pausas del habla imitando el compartamiento más humano.
+            Aunque WaveNet ya usa convoluciones dilatadas para aumentar su campo de visión, añadir estas capas ayuda a no aumentar tanto el coste computacional.   
+        </p>
+    </section>
 
     <section class="section">
         <h2>Redes de Ondas Condicionales</h2>
         <p>
-            WaveNet puede ser extendido para generar audio condicionado a diferentes tipos de entradas. Estas <span class="highlight">redes de ondas condicionales</span> permiten que el modelo produzca diferentes resultados basados en contexto adicional.
+            WaveNet puede ser extendido para generar audio condicionado a diferentes tipos de entradas. Estas <span class="highlight">redes de ondas condicionales</span>
+             permiten que el modelo produzca diferentes resultados basados en contexto adicional.
         </p>
         <ul>
             <li><b>Texto</b>: Condicionamiento con embeddings de texto para síntesis de voz (TTS).</li>
@@ -296,12 +323,12 @@ En otras palabras, de todas los posibles niveles cuantizados, el nivel 80 tiene 
             
             <!-- Concatenativo -->
             <div class="audio-sample">
-                <h3>Concatenativo (Tradicional)</h3>
+                <h3>Paramétrica (Tradicional)</h3>
                 <audio controls class="audio-player">
-                    <source src="audios/us-english-concatenative-1.wav" type="audio/mpeg">
+                    <source src="audios/us-english-parametric-1.wav" type="audio/mpeg">
                     Tu navegador no soporta el elemento de audio.
                 </audio>
-                <p class="audio-description">Audio generado por método concatenativo tradicional</p>
+                <p class="audio-description">Audio generado por método paramétrico tradicional</p>
             </div>
         </div>
     </section>
