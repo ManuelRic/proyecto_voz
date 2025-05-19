@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Google Cloud Text-to-Speech</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body {
+            background: linear-gradient(135deg, #27230f, #80733d, #938140);
+            color: #f0f0f0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 30px;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        h1 {
+            font-size: 48px;
+            color: #FFD369;
+            margin: 0;
+        }
+
+        .section {
+            background: #1e1e1e;
+            border-radius: 12px;
+            padding: 25px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+            margin-bottom: 30px;
+            border-left: 4px solid #c87100;
+        }
+
+        h2 {
+            color: #c87100;
+            font-size: 24px;
+            border-bottom: 2px solid #FFD369;
+            padding-bottom: 8px;
+            margin-top: 0;
+        }
+
+        p, li {
+            font-size: 18px;
+            line-height: 1.6;
+        }
+
+        ul {
+            padding-left: 20px;
+        }
+
+        li::marker {
+            color: #FFD369;
+        }
+
+        footer {
+            text-align: center;
+            margin-top: 50px;
+            font-size: 14px;
+            color: #aaa;
+        }
+        
+        .audio-player {
+            width: 100%;
+            margin: 10px 0;
+        }
+
+        h3 {
+            color: #FFD369;
+            font-size: 28px;
+            text-align: center;
+            margin: 30px 0 20px;
+            position: relative;
+            padding-bottom: 10px;
+        }
+
+        h3::after {
+            content: "";
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 3px;
+            background: linear-gradient(to right, transparent, #c87100, transparent);
+        }
+
+        .section {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .section:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4);
+        }
+
+        .audio-player {
+            background: #2a2a2a;
+            border-radius: 8px;
+            padding: 10px;
+            margin: 20px 0;
+            width: calc(100% - 20px);
+        }
+
+        /* Estilos para los controles nativos de audio */
+        audio::-webkit-media-controls-panel {
+            background: #333;
+            border-radius: 5px;
+        }
+
+        audio::-webkit-media-controls-play-button,
+        audio::-webkit-media-controls-mute-button {
+            filter: invert(80%);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Google Cloud TTS</h1>
+            <p>Explicación del funcionamiento del TTS de Google</p>
+        </header>
+
+        <section class="section">
+            <h2>Que es y como funciona Google Cloud TTS</h2>
+            <p>
+                Google Cloud Text-to-Speech es un servicio de síntesis de voz basado en la nube que utiliza inteligencia artificial 
+                para convertir texto en habla natural. Ofrece dos tipos de voces:
+                <ul>
+                    <li>
+                        Voces WaveNet: Tecnología avanzada basada en redes neuronales profundas 
+                        (la arquitectura WaveNet original de DeepMind), que produce audio con calidad casi humana.
+                    </li>
+                    <li>
+                        Voces estándar: Síntesis tradicional de alta calidad pero menos natural que WaveNet.
+                    </li>
+ 
+                </ul>
+
+                Características principales:
+                <ul>
+                    <li>
+                        Soporta más de 220 voces en 40+ idiomas
+                    </li>
+                    <li>
+                        Permite ajustar tono, velocidad de habla y volumen
+                    </li>
+                    <li>
+                        Soporta SSML (Speech Synthesis Markup Language) para control avanzado
+                    </li>
+                    <li>
+                        Ofrece audio en varios formatos (MP3, WAV, OGG)
+                    </li>
+                    <li>
+                        Incluye funciones de personalización de voz para empresas
+                    </li>
+                </ul>                
+            </p>
+
+            
+        </section>
+        <h3>Funcionamiento</h3>
+        <section class="section">
+            <h2>1. Entrada del texto</h2>
+            <p>Google Cloud TTS recibe una cadena de texto plano o una entrada estructurada en SSML (Speech Synthesis Markup Language), 
+                lo cual permite controlar detalles como pausas, énfasis o pronunciación personalizada.</p>
+        </section>
+
+        <section class="section">
+            <h2>2. Análisis lingüístico</h2>
+            <p>El sistema analiza el texto para:</p>
+            <ul>
+                <li>Separar frases y oraciones.</li>
+                <li>Detectar idioma y dialecto.</li>
+                <li>Determinar pronunciaciones correctas (homónimos, números, nombres).</li>
+                <li>Aplicar reglas gramaticales y fonéticas según el idioma.</li>
+            </ul>
+        </section>
+
+        <section class="section">
+            <h2>3. Conversión texto a fonemas (TTP)</h2>
+            <p>El texto se convierte en una representación fonética que indica cómo deben sonar las palabras. Este paso es clave y altamente dependiente del idioma y su acento regional.</p>
+        </section>
+
+        <section class="section">
+            <h2>4. Síntesis de voz</h2>
+            <p>Google Cloud ofrece dos enfoques de síntesis:</p>
+            <ul>
+                <li><strong>Concatenativa</strong>: Combina fragmentos de voz humana pregrabada (tecnología más antigua).</li>
+                <li><strong>Neuronal (WaveNet)</strong>: Utiliza redes neuronales profundas para generar audio desde cero con un realismo superior. Esta es la opción principal actualmente, basada en tecnología de DeepMind.</li>
+            </ul>
+        </section>
+
+        <section class="section">
+            <h2>5. Post-procesamiento</h2>
+            <p>El audio final se ajusta según las preferencias del usuario:</p>
+            <ul>
+                <li>Velocidad de habla.</li>
+                <li>Tono o entonación.</li>
+                <li>Volumen.</li>
+                <li>Efectos adicionales (opcional).</li>
+            </ul>
+        </section>
+
+        <section class="section">
+            <h2>Audio creado con Google Cloud</h2>
+            <audio controls class="audio-player">
+                <source src="audios/synthesis.wav" type="audio/mpeg">
+                Tu navegador no soporta el elemento de audio.
+            </audio>
+        </section>  
+    </div>
+</body>
+</html>

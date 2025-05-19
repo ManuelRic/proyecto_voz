@@ -208,6 +208,50 @@
         audio::-webkit-media-controls-mute-button {
             filter: invert(80%);
         }
+        .spectrogram-container {
+            display: flex;
+            justify-content: space-around;
+            align-items: flex-start;
+            gap: 30px;
+            margin: 30px 0;
+        }
+
+        .spectrogram-item {
+            flex: 1;
+            min-width: 0;
+            text-align: center;
+        }
+
+        .spectrogram-item img {
+            max-height: 400px;
+            width: auto;
+            max-width: 100%;
+            border: 1px solid #444;
+            border-radius: 4px;
+        }
+
+        .spectrogram-item p {
+            margin-top: 10px;
+            color: #BBBBBB;
+            font-size: 16px;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .spectrogram-container {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .spectrogram-item {
+                width: 100%;
+                margin-bottom: 20px;
+            }
+            
+            .spectrogram-item img {
+                max-height: 250px;
+            }
+        }
     </style>
 </head>
 <body>
@@ -311,7 +355,6 @@ En otras palabras, de todas los posibles niveles cuantizados, el nivel 80 tiene 
     <section class="card">
         <h2>Demo Interactiva: Comparación de Técnicas</h2>
         <div class="audio-comparison">
-            <!-- WaveNet -->
             <div class="audio-sample">
                 <h3>WaveNet (Generativo)</h3>
                 <audio controls class="audio-player">
@@ -321,7 +364,6 @@ En otras palabras, de todas los posibles niveles cuantizados, el nivel 80 tiene 
                 <p class="audio-description">Audio generado por modelo WaveNet de DeepMind</p>
             </div>
             
-            <!-- Concatenativo -->
             <div class="audio-sample">
                 <h3>Paramétrica (Tradicional)</h3>
                 <audio controls class="audio-player">
@@ -330,6 +372,21 @@ En otras palabras, de todas los posibles niveles cuantizados, el nivel 80 tiene 
                 </audio>
                 <p class="audio-description">Audio generado por método paramétrico tradicional</p>
             </div>
+        <p>
+            Ambos audios son muestras de Google que usan los mismas bases de datos pero las distintas síntensis, es comprobable
+            que la paramétrica a pesar de tener una buena calidad de audio al tener en Comparación a wavenet tiene flaquezas debido a 
+            tener una síntesis menos actualizada. 
+        </p>
+        <div class="spectrogram-container">
+            <div class="spectrogram-item">
+                <img src="img/ev_1/espctrogramama1.png" alt="Espectrograma WaveNet">
+                <p>Espectrograma WaveNet</p>
+            </div>
+            <div class="spectrogram-item">
+                <img src="img/ev_1/espctrogramama2.png" alt="Espectrograma Tradicional">
+                <p>Espectrograma Paramétrico</p>
+            </div>
+        </div>
         </div>
     </section>
 </body>
