@@ -9,23 +9,227 @@
       max-width: 600px;
       height: 80px;
       font-size: 16px;
+      font-family: 'CalSans';
+    }
+      @font-face {
+    font-family: 'CalSans';
+    src: url('fonts/CalSans-Regular.ttf') format('truetype');
+  }
+        body {
+            background-color: #121212;
+            color: #f0f0f0;
+            font-family: 'CalSans', sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 30px;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        h1 {
+            font-size: 48px;
+            color: #FFD369;
+            margin: 0;
+        }
+
+        .section {
+            background: #1e1e1e;
+            border-radius: 12px;
+            padding: 25px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+            margin-bottom: 30px;
+            border-left: 4px solid #c87100;
+        }
+
+        h2 {
+            color: #c87100;
+            font-size: 24px;
+            border-bottom: 2px solid #FFD369;
+            padding-bottom: 8px;
+            margin-top: 0;
+        }
+
+        p, li {
+            font-size: 18px;
+            line-height: 1.6;
+        }
+
+        ul {
+            padding-left: 20px;
+        }
+
+        li::marker {
+            color: #FFD369;
+        }
+
+        footer {
+            text-align: center;
+            margin-top: 50px;
+            font-size: 14px;
+            color: #aaa;
+        }
+        
+        .audio-player {
+            width: 100%;
+            margin: 10px 0;
+        }
+
+        h3 {
+            color: #FFD369;
+            font-size: 28px;
+            text-align: center;
+            margin: 30px 0 20px;
+            position: relative;
+            padding-bottom: 10px;
+        }
+
+        h3::after {
+            content: "";
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 3px;
+            background: linear-gradient(to right, transparent, #c87100, transparent);
+        }
+
+        .section {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .section:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4);
+        }
+
+        .audio-player {
+            background: #2a2a2a;
+            border-radius: 8px;
+            padding: 10px;
+            margin: 20px 0;
+            width: calc(100% - 20px);
+        }
+
+        /* Estilos para los controles nativos de audio */
+        audio::-webkit-media-controls-panel {
+            background: #333;
+            border-radius: 5px;
+        }
+
+        audio::-webkit-media-controls-play-button,
+        audio::-webkit-media-controls-mute-button {
+            filter: invert(80%);
+        }
+        #back_button{
+            cursor: pointer;
+            position:fixed;
+            top: 0;
+            left: 0;
+            filter: invert(100%);
+            width: 80px;
+            margin: 20px;
+        }
+        
+        #back_button:hover{
+            filter: invert(80%);
+        }
+        #sintetizar {
+          display: block;
+          margin: 0 auto;
+          font-family: 'CalSans', sans-serif;
+          color: rgb(255, 255, 255);
+          background-color: #7e5929;
+          padding: 12px 20px;
+          font-size: 16px;
+          border: none;
+          border-radius: 6px;
+          cursor: pointer;
+          width:fit-content;
+          margin-top: 20px;
+        }
+        .file-upload{
+        height: 80px;
+        position: relative;
+        display: block;
+        cursor: pointer;
+        background-color: #c87100;
+        color: white;
+        font-size: 16px;
+        padding: 12px 20px;
+        border-radius: 8px;
+        transition: background-color 0.3s ease, transform 0.2s;
+        overflow: hidden;
+      }
+      .file-upload:hover {
+      background-color: #FFD369;
+      transform: scale(1.03);
+    }
+    .file-upload input[type="file"] {
+      position: absolute;
+      left: 0;
+      top: 0;
+      opacity: 0;
+      height: 100%;
+      width: 100%;
+      cursor: pointer;
+    }
+    #file-name {
+      margin-top: 10px;
+      
+      color: #FFD369;
     }
   </style>
 </head>
 <body>
-    <h2>Síntesis de voz con Spanish-F5</h2>
-
-    <p>Sube un archivo de audio (.wav):</p>
-    <input type="file" id="audioInput" accept="audio/wav" />
-    <br><br>
-
-    <label>Texto original del audio:</label><br>
-    <textarea id="refText">Alejandro puede ser muy gilipollas a veces, pero cuando se calla la boca, podemos ser muchas veces felices. Sin embargo, es muy alto y tiene las tetas muy grandes.</textarea>
-    <br><br>
-
-    <label>Texto a generar:</label><br>
-    <textarea id="genText">Esto es una muestra de como trabaja nuestro texto a voz. Espero que te guste el resultado. Es recomendable usar audios de entre 20 y 30 segundos.</textarea>
-    <br><br>
+    <a href="page_1.html">
+    <img id="back_button" src="img/ev_1/home.png" alt="Back">
+    </a>
+    <div class="container">
+      <header>
+        <h1>Síntesis de voz con Spanish-F5</h1>
+      </header>
+      <section class="section">
+        <h2>Spanish-F5</h2>
+        <p>Para esta pequeña demostración, hemos usado el modelo Spanish-F5, que es una variante de F5-TTS que soporta español.</p>
+        <p>A diferencia de otros modelos como Tacotron, el audio en vez de generar muestra a muestra, se genera de forma más eficiente.</p>
+        <p>Usa una arquitectura estilo Transformer, pero adaptada para generar audio por medio de pasos de difusión.</p>
+        <p>A diferencia de los tradicionales Transformers, se emplea ConvNeXt que está basada en convoluciones. </p>
+        <p>El texto a convertir se rellena con tokens vacíos oara tener la misma longitud que el espectrograma y evitar calcular fonemas o duraciones manualmente.</p>
+        <p>Se aplica un denoising progresivo y Sway Sampling para generar de forma rápida y estable</p>
+        <p>El espectrograma se convierte en audio usando un vocoder.</p>
+        <br><br>
+      </section>
+      <section class="section">
+        
+        <h2>Sube un archivo de audio (.wav):</h2>
+        <label class="file-upload">Arrastra tu archivo de audio aquí o haz click para buscar en tu ordenador<input type="file" id="audioInput" accept="audio/wav"/></label>
+        <div id="file-name"></div>
+        <br><br>
+      </section>
+      
+    
+    <br>
+    <section class="section">
+      <h2>Texto original</h2>
+      <textarea id="refText" placeholder="Escribe lo que has dicho en el archivo de audio"></textarea>
+      <br><br>
+    </section>
+    
+    <section class="section">
+      <h2>Texto a generar:</h2><br>
+      <textarea id="genText">Esto es una muestra de como trabaja nuestro texto a voz. Espero que te guste el resultado. Es recomendable usar audios de entre 20 y 30 segundos.</textarea>
+      <br><br>
+    </section>
+    
 
     <button id="sintetizar">Generar voz</button>
 
@@ -38,6 +242,21 @@
 
     <h3>Espectrograma:</h3>
     <img id="spectrogram" alt="Espectrograma generado" style="display: none; max-width: 600px;">
+    </div>
+    
+    <script>
+    const input = document.getElementById("audioInput");
+    const fileNameDisplay = document.getElementById("file-name");
+
+    input.addEventListener("change", () => {
+      const file = input.files[0];
+      if (file) {
+        fileNameDisplay.textContent = `Archivo seleccionado: ${file.name}`;
+      } else {
+        fileNameDisplay.textContent = "";
+      }
+    });
+  </script>
 
 </body>
 </html>
