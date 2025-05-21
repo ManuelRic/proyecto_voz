@@ -2,20 +2,44 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8">
-  <title>Demo Spanish-F5 con archivo local</title>
+  <title>Síntesis neuronal demo</title>
+  <link rel="icon" href="img/ev_1/logo.png" type="image/x-icon">
   <style>
-    textarea {
+    .tts-container {
+      padding: 5px;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      margin:0 auto;
       width: 100%;
-      max-width: 600px;
-      height: 80px;
-      font-size: 16px;
       
+    }
+
+    textarea {
+      margin-left: 10%;
+      width: 70%;
+      padding: 15px;
+      font-size: 16px;
+      border: 2px solid #ccc;
+      border-radius: 10px;
+      resize: vertical;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+    }
+    label {
+      margin-left: 10%;
+      
+      display: block;
+      font-size: 22px;
+      color: #c87100;
+      font-weight: bold;
+      margin-bottom: 10px;
+      margin-top: 15px;
     }
       @font-face {
     font-family: 'CalSans';
     src: url('fonts/CalSans-Regular.ttf') format('truetype');
   }
         body {
+            justify-content: center;
             background-color: #121212;
             color: #f0f0f0;
             font-family: 'CalSans', sans-serif;
@@ -136,6 +160,7 @@
           cursor: pointer;
           width:fit-content;
           margin-top: 20px;
+          justify-self: center;
         }
         .file-upload{
         height: 80px;
@@ -201,30 +226,30 @@
         <h1>Síntesis de voz con Spanish-F5</h1>
       </header>
       
-      <section class="section" >
+      <section class="section">
         
         <h2>Sube un archivo de audio (.wav):</h2>
-        <label class="file-upload">Arrastra tu archivo de audio aquí o haz click para buscar en tu ordenador<input type="file" id="audioInput" accept="audio/wav"/></label>
+        <label class="file-upload" style="display: block;width: 80%;">Arrastra tu archivo de audio aquí o haz click para buscar en tu ordenador<input type="file" id="audioInput" accept="audio/wav"/></label>
         <div id="file-name"></div>
         <br><br>
       </section>
       
     
     <br>
-    <section class="section">
-      <h2>Texto original</h2>
-      <textarea id="refText" placeholder="Escribe lo que has dicho en el archivo de audio"></textarea>
-      <br><br>
-    </section>
-    
-    <section class="section">
-      <h2>Texto a generar:</h2><br>
-      <textarea id="genText">Esto es una muestra de como trabaja nuestro texto a voz. Espero que te guste el resultado. Es recomendable usar audios de entre 20 y 30 segundos.</textarea>
-      <br><br>
-    </section>
-    
+      <div class="tts-container">
+        
+        <label for="refText">Texto original</label>
+        <textarea id="refText" placeholder="Escribe lo que has dicho en el archivo de audio"></textarea>
+        <br><br>
+      
+        
+        <label for="genText">Texto a generar:</label>
+        <textarea id="genText" >Esto es una muestra de como trabaja nuestro texto a voz. Espero que te guste el resultado. Es recomendable usar audios de entre 20 y 30 segundos.</textarea>
+        <br><br>
 
-    <button id="sintetizar">Generar voz</button>
+        <button id="sintetizar">Generar voz</button>
+  </div>
+      
 
     <!-- Script externo -->
     <script type="module" src="voice_cloning.js"></script>
