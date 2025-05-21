@@ -119,6 +119,34 @@
         audio::-webkit-media-controls-mute-button {
             filter: invert(80%);
         }
+
+        textarea {
+        width: 90%;
+        max-width: 100%;
+        padding: 15px;
+        font-size: 16px;
+        border: 2px solid #ccc;
+        border-radius: 10px;
+        resize: vertical;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+        }
+
+        .section textarea, #speak_button {
+        display: block;
+        margin: 0 auto;
+        }
+
+        
+
+        #speak_button{
+        cursor: pointer;
+        filter: invert(90%);
+        width: 65px;
+        }
+
+        #speak_button:hover{
+        filter: invert(80%);
+        }
     </style>
 </head>
 <body>
@@ -130,9 +158,8 @@
 
         <section class="section">
             <h2>Qué es y cómo funciona Google Cloud TTS</h2>
-            <p>
-                Google Cloud Text-to-Speech es un servicio de síntesis de voz basado en la nube que utiliza inteligencia artificial 
-                para convertir texto en habla natural. Ofrece dos tipos de voces:
+            <p>Google Cloud Text-to-Speech es un servicio de síntesis de voz basado en la nube que utiliza inteligencia artificial 
+                para convertir texto en habla natural. Ofrece dos tipos de voces:</p>
                 <ul>
                     <li>
                         Voces WaveNet: Tecnología avanzada basada en redes neuronales profundas 
@@ -167,14 +194,11 @@
             
         </section>
         <h3>Funcionamiento</h3>
-        <section class="section">
-            <h2>1. Entrada del texto</h2>
-            <p>Google Cloud TTS recibe una cadena de texto plano o una entrada estructurada en SSML (Speech Synthesis Markup Language), 
-                lo cual permite controlar detalles como pausas, énfasis o pronunciación personalizada.</p>
-        </section>
 
         <section class="section">
-            <h2>2. Análisis lingüístico</h2>
+            <h2>1. Entrada y análisis lingüístico</h2>
+            <p>Google Cloud TTS recibe una cadena de texto plano o una entrada estructurada en SSML (Speech Synthesis Markup Language), 
+                lo cual permite controlar detalles como pausas, énfasis o pronunciación personalizada.</p>
             <p>El sistema analiza el texto para:</p>
             <ul>
                 <li>Separar frases y oraciones.</li>
@@ -185,28 +209,28 @@
         </section>
 
         <section class="section">
-            <h2>3. Conversión texto a fonemas (TTP)</h2>
+            <h2>2. Conversión texto a fonemas (TTP)</h2>
             <p>El texto se convierte en una representación fonética que indica cómo deben sonar las palabras. Este paso es clave y altamente dependiente del idioma y su acento regional.</p>
+            <textarea id="text-input" rows="4" cols="50">Cambia el texto y comprueba la explicación.</textarea><br>
+            <img id="speak_button" src="img/ev_1/play.png">
         </section>
 
         <section class="section">
-            <section class="section">
-                <h2>4. Síntesis de voz</h2>
-                <p>Google Cloud ofrece dos enfoques principales:</p>
-                <ul>
-                    <li><strong>Concatenativa</strong>: Combina fragmentos pregrabados.</li>
-                    <li><strong>Neuronal (WaveNet + Tacotron)</strong>: 
-                        <ul>
-                            <li>Tacotron transforma el texto en espectrogramas mel (representación intermedia).</li>
-                            <li>WaveNet convierte esos espectrogramas en audio de alta calidad.</li>
-                        </ul>
-                    </li>
-                </ul>
-            </section>
+            <h2>3. Síntesis de voz</h2>
+            <p>Google Cloud ofrece dos enfoques principales:</p>
+            <ul>
+                <li><strong>Concatenativa</strong>: Combina fragmentos pregrabados.</li>
+                <li><strong>Neuronal (WaveNet + Tacotron)</strong>: 
+                    <ul>
+                        <li>Tacotron transforma el texto en espectrogramas mel (representación intermedia).</li>
+                        <li>WaveNet convierte esos espectrogramas en audio de alta calidad.</li>
+                    </ul>
+                </li>
+            </ul>
         </section>
 
         <section class="section">
-            <h2>5. Post-procesamiento</h2>
+            <h2>4. Post-procesamiento</h2>
             <p>El audio final se ajusta según las preferencias del usuario:</p>
             <ul>
                 <li>Velocidad de habla.</li>
