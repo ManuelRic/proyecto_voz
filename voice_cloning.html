@@ -9,7 +9,7 @@
       max-width: 600px;
       height: 80px;
       font-size: 16px;
-      font-family: 'CalSans';
+      
     }
       @font-face {
     font-family: 'CalSans';
@@ -77,10 +77,7 @@
             color: #aaa;
         }
         
-        .audio-player {
-            width: 100%;
-            margin: 10px 0;
-        }
+        
 
         h3 {
             color: #FFD369;
@@ -111,24 +108,8 @@
             box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4);
         }
 
-        .audio-player {
-            background: #2a2a2a;
-            border-radius: 8px;
-            padding: 10px;
-            margin: 20px 0;
-            width: calc(100% - 20px);
-        }
-
-        /* Estilos para los controles nativos de audio */
-        audio::-webkit-media-controls-panel {
-            background: #333;
-            border-radius: 5px;
-        }
-
-        audio::-webkit-media-controls-play-button,
-        audio::-webkit-media-controls-mute-button {
-            filter: invert(80%);
-        }
+        
+        
         #back_button{
             cursor: pointer;
             position:fixed;
@@ -187,6 +168,28 @@
       
       color: #FFD369;
     }
+
+    
+    .audio-player {
+            background: #2a2a2a;
+            border-radius: 8px;
+            padding: 10px;
+            margin: 20px 0;
+            width: calc(100% - 20px);
+            
+        }
+
+        /* Estilos para los controles nativos de audio */
+        audio::-webkit-media-controls-panel {
+            background: #333;
+            border-radius: 5px;
+        }
+
+        audio::-webkit-media-controls-play-button,
+        audio::-webkit-media-controls-mute-button {
+            filter: invert(80%);
+        }
+        
   </style>
 </head>
 <body>
@@ -197,18 +200,8 @@
       <header>
         <h1>Síntesis de voz con Spanish-F5</h1>
       </header>
-      <section class="section">
-        <h2>Spanish-F5</h2>
-        <p>Para esta pequeña demostración, hemos usado el modelo Spanish-F5, que es una variante de F5-TTS que soporta español.</p>
-        <p>A diferencia de otros modelos como Tacotron, el audio en vez de generar muestra a muestra, se genera de forma más eficiente.</p>
-        <p>Usa una arquitectura estilo Transformer, pero adaptada para generar audio por medio de pasos de difusión.</p>
-        <p>A diferencia de los tradicionales Transformers, se emplea ConvNeXt que está basada en convoluciones. </p>
-        <p>El texto a convertir se rellena con tokens vacíos oara tener la misma longitud que el espectrograma y evitar calcular fonemas o duraciones manualmente.</p>
-        <p>Se aplica un denoising progresivo y Sway Sampling para generar de forma rápida y estable</p>
-        <p>El espectrograma se convierte en audio usando un vocoder.</p>
-        <br><br>
-      </section>
-      <section class="section">
+      
+      <section class="section" >
         
         <h2>Sube un archivo de audio (.wav):</h2>
         <label class="file-upload">Arrastra tu archivo de audio aquí o haz click para buscar en tu ordenador<input type="file" id="audioInput" accept="audio/wav"/></label>
@@ -237,11 +230,16 @@
     <script type="module" src="voice_cloning.js"></script>
 
     <br><br>
+    <section class="section" style="justify-content: center;">
     <h3>Audio generado:</h3>
-    <audio id="audioPlayer" controls style="display: none;"></audio>
-
+    
+    <div class="audio-sample"><audio id="audioPlayer" style="width: 100%;display: none;" controls ></audio></div>
+    </section>
+    <section class="section">
     <h3>Espectrograma:</h3>
-    <img id="spectrogram" alt="Espectrograma generado" style="display: none; max-width: 600px;">
+    <img id="spectrogram" alt="Espectrograma generado" style="display: none; width: 100%;">
+    </section>
+    
     </div>
     
     <script>
@@ -256,6 +254,8 @@
         fileNameDisplay.textContent = "";
       }
     });
+    
+
   </script>
 
 </body>
