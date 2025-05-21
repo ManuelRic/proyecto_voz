@@ -295,7 +295,7 @@ export default class TextToSpeech {
   }
 }
 
-export { TTSUtils };
+export { TTSUtils, Phonemes };
 
 
 // Uso básico:

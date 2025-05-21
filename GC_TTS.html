@@ -147,6 +147,75 @@
         #speak_button:hover{
         filter: invert(80%);
         }
+
+        #phoneme-help-container {
+        position: relative;
+        text-align: center;
+        margin: 20px auto;
+        }
+
+        #show-phoneme-help {
+        background-color: #c87100;
+        color: white;
+        border: none;
+        padding: 10px 16px;
+        border-radius: 8px;
+        font-size: 16px;
+        cursor: pointer;
+        }
+
+        #phoneme-tooltip {
+        display: none;
+        position: absolute;
+        top: 100%;
+        left: 50%;
+        transform: translateX(-50%);
+        background-color: #1e1e1e;
+        color: #FFD369;
+        border: 1px solid #c87100;
+        padding: 12px;
+        border-radius: 10px;
+        margin-top: 8px;
+        z-index: 100;
+        width: 600px; /* ⬅️ Aumentamos el ancho */
+        max-height: unset; /* elimina el límite de altura */
+        overflow-y: visible; /* permite que se vea toda la tabla sin scroll */
+        box-shadow: 0 4px 20px rgba(0,0,0,0.4);
+        }
+
+        #phoneme-tooltip table {
+        width: 100%;
+        border-collapse: collapse;
+        font-size: 16px;
+        }
+
+        #phoneme-tooltip th, #phoneme-tooltip td {
+        padding: 8px 14px;
+        text-align: left;
+        }
+
+        #phoneme-tooltip tr:nth-child(even) {
+        background-color: #2a2a2a;
+        }
+
+        #phoneme-tooltip {
+        width: 60em;
+        max-width: 90vw;
+        }
+
+        a {
+        color: #FFD369;
+        text-decoration: none;
+        font-weight: bold;
+        border-bottom: 2px solid transparent;
+        transition: border-color 0.3s, color 0.3s;
+        }
+
+        a:hover {
+        color: #ffffff;
+        border-bottom: 2px solid #FFD369;
+        }
+
     </style>
 </head>
 <body>
@@ -213,6 +282,23 @@
             <p>El texto se convierte en una representación fonética que indica cómo deben sonar las palabras. Este paso es clave y altamente dependiente del idioma y su acento regional.</p>
             <textarea id="text-input" rows="4" cols="50">Cambia el texto y comprueba la explicación.</textarea><br>
             <img id="speak_button" src="img/ev_1/play.png">
+
+            <div style="text-align: center; color: white; margin-top: 20px;">
+                <h2>Fonemas:</h2>
+                <p id="phonemes-output"></p>
+            </div>
+
+
+            <div id="phoneme-help-container">
+            <button id="show-phoneme-help">¿Qué significan los fonemas?</button>
+            <div id="phoneme-tooltip">
+                <table>
+                <tbody id="phoneme-table-body"></tbody>
+                </table>
+            </div>
+            </div>
+
+
         </section>
 
         <section class="section">
@@ -220,13 +306,15 @@
             <p>Google Cloud ofrece dos enfoques principales:</p>
             <ul>
                 <li><strong>Concatenativa</strong>: Combina fragmentos pregrabados.</li>
-                <li><strong>Neuronal (WaveNet + Tacotron)</strong>: 
+                <li><strong>Neuronal (Tacotron + WaveNet)</strong>: 
                     <ul>
                         <li>Tacotron transforma el texto en espectrogramas mel (representación intermedia).</li>
                         <li>WaveNet convierte esos espectrogramas en audio de alta calidad.</li>
                     </ul>
                 </li>
             </ul>
+
+            <p>En el siguiente <a href="https://colab.research.google.com/drive/13jolfG1bLVVCLYKXsVZ6GaKo4hjqovxI?usp=sharing" target="_blank">cuaderno</a> puedes encontrar un ejemplo del funcionamiento de Tacotron2 y generar tus propios espectrogramas. </p>
         </section>
 
         <section class="section">
@@ -248,5 +336,110 @@
             </audio>
         </section>  
     </div>
+
+    <script type="module">
+    import TextToSpeech, { TTSUtils, Phonemes } from './main.js';
+
+    const tts = new TextToSpeech({ debug: true });
+
+    function removeAccents(str) {
+        return str.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+    }
+
+    document.getElementById('speak_button').addEventListener('click', async () => {
+        const rawText = document.getElementById('text-input').value;
+        const text = removeAccents(rawText);
+        
+        await tts.initialize();
+
+        // Procesar texto
+        const words = TTSUtils.tokenize(text);
+
+        const phonemes = await tts.phonemeConverter.wordsToPhonemes(words);
+        document.getElementById('phonemes-output').textContent = formatPhonemesWithPauseOutside(phonemes);
+    });
+
+    function formatPhonemesWithPauseOutside(phonemeList, pauseId = 40) {
+        const output = [];
+        let current = [];
+
+        for (const phoneme of phonemeList) {
+        if (phoneme === pauseId) {
+            if (current.length > 0) {
+            output.push(`(${current.join(', ')})`);
+            current = [];
+            }
+            output.push(pauseId); // Pausa fuera de paréntesis
+        } else {
+            current.push(phoneme);
+        }
+        }
+
+        if (current.length > 0) {
+        output.push(`(${current.join(', ')})`);
+        }
+
+        return output.join(' ');
+    }
+
+    // Mostrar la tabla con 4 fonemas por fila
+    const tableBody = document.getElementById('phoneme-table-body');
+    const entries = Object.entries(Phonemes);
+
+    for (let i = 0; i < entries.length; i += 4) {
+    const row = document.createElement('tr');
+
+    for (let j = 0; j < 4; j++) {
+        const entry = entries[i + j];
+        if (entry) {
+        const [name, value] = entry;
+        row.innerHTML += `<td><strong>${value}</strong></td><td>${name}</td>`;
+        } else {
+        // Celda vacía si no hay más fonemas
+        row.innerHTML += `<td></td><td></td>`;
+        }
+    }
+
+    tableBody.appendChild(row);
+    }
+
+
+
+
+    //Boton para mostrar la tabla
+    const helpButton = document.getElementById('show-phoneme-help');
+    const tooltip = document.getElementById('phoneme-tooltip');
+
+    // Mostrar al pasar el ratón por el botón
+    helpButton.addEventListener('mouseenter', () => {
+    tooltip.style.display = 'block';
+    });
+
+    // Ocultar solo cuando el mouse salga tanto del botón como de la tabla
+    let hideTimeout;
+
+    function scheduleHideTooltip() {
+    hideTimeout = setTimeout(() => {
+        tooltip.style.display = 'none';
+    }, 200);
+    }
+
+    function cancelHideTooltip() {
+    clearTimeout(hideTimeout);
+    }
+
+    // Ocultar al salir del botón (si no entra al tooltip)
+    helpButton.addEventListener('mouseleave', scheduleHideTooltip);
+
+    // Cancelar si entra al tooltip
+    tooltip.addEventListener('mouseenter', cancelHideTooltip);
+
+    // Ocultar si sale del tooltip también
+    tooltip.addEventListener('mouseleave', scheduleHideTooltip);
+
+
+    </script>
+
+
 </body>
 </html>
