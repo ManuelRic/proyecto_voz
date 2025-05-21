@@ -349,6 +349,18 @@ En otras palabras, de todas los posibles niveles cuantizados, el nivel 80 tiene 
             <li><b>Etiquetas musicales</b>: Para generar música específica por género o instrumento.</li>
         </ul>
     </section>
+    <section class="section">
+        <h2>Modelos complementarios</h2>
+        <p>
+            Tacotron es un modelo secuencia-a-secuencia (seq2seq) que convierte texto directamente en espectrogramas mel, 
+            los cuales luego pueden ser transformados en audio usando WaveNet como vocoder. Este enfoque combinado es la base 
+            de sistemas como Google Cloud TTS.
+        </p>
+        <ul>
+            <li><strong>Arquitectura:</strong> Usa redes neuronales recurrentes (RNN) y atención para alinear texto con características acústicas.</li>
+            <li><strong>Integración con WaveNet:</strong> Tacotron 2 genera espectrogramas mel que WaveNet convierte en ondas de audio realistas.</li>
+        </ul>
+    </section>
 
 </div>
     

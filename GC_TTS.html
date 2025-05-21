@@ -129,7 +129,7 @@
         </header>
 
         <section class="section">
-            <h2>Que es y como funciona Google Cloud TTS</h2>
+            <h2>Qué es y cómo funciona Google Cloud TTS</h2>
             <p>
                 Google Cloud Text-to-Speech es un servicio de síntesis de voz basado en la nube que utiliza inteligencia artificial 
                 para convertir texto en habla natural. Ofrece dos tipos de voces:
@@ -190,12 +190,19 @@
         </section>
 
         <section class="section">
-            <h2>4. Síntesis de voz</h2>
-            <p>Google Cloud ofrece dos enfoques de síntesis:</p>
-            <ul>
-                <li><strong>Concatenativa</strong>: Combina fragmentos de voz humana pregrabada (tecnología más antigua).</li>
-                <li><strong>Neuronal (WaveNet)</strong>: Utiliza redes neuronales profundas para generar audio desde cero con un realismo superior. Esta es la opción principal actualmente, basada en tecnología de DeepMind.</li>
-            </ul>
+            <section class="section">
+                <h2>4. Síntesis de voz</h2>
+                <p>Google Cloud ofrece dos enfoques principales:</p>
+                <ul>
+                    <li><strong>Concatenativa</strong>: Combina fragmentos pregrabados.</li>
+                    <li><strong>Neuronal (WaveNet + Tacotron)</strong>: 
+                        <ul>
+                            <li>Tacotron transforma el texto en espectrogramas mel (representación intermedia).</li>
+                            <li>WaveNet convierte esos espectrogramas en audio de alta calidad.</li>
+                        </ul>
+                    </li>
+                </ul>
+            </section>
         </section>
 
         <section class="section">
