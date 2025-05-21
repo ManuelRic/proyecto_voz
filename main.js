@@ -295,6 +295,9 @@ export default class TextToSpeech {
   }
 }
 
+export { TTSUtils };
+
+
 // Uso básico:
 // const tts = new TextToSpeech({ debug: true });
 // tts.textToSpeech("Hola mundo").then(source => {

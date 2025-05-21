@@ -78,20 +78,75 @@
   </a>
 
   <div class="ta_container">
-      <textarea id="text-input" rows="4" cols="50">Me llamo Paco</textarea><br>
+      <textarea id="text-input" rows="4" cols="50">Esto es un texto de prueba</textarea><br>
   </div>
 
   <button id="play-button">Reproducir</button>
 
-  <script type="module">
-    import TextToSpeech from './main.js';
+  <div style="text-align: center; color: white; margin-top: 20px;">
+    <h2>Palabras:</h2>
+    <p id="words-output"></p>
 
-    const tts = new TextToSpeech({ debug: true });
+    <h2>Fonemas:</h2>
+    <p id="phonemes-output"></p>
+  </div>
 
-    document.getElementById('play-button').addEventListener('click', async () => {
-      const text = document.getElementById('text-input').value;
-      await tts.textToSpeech(text);
-    });
-  </script>
+
+<script type="module">
+  import TextToSpeech, { TTSUtils } from './main.js';
+
+  const tts = new TextToSpeech({ debug: true });
+
+  let currentAudioSource = null;
+
+  document.getElementById('play-button').addEventListener('click', async () => {
+    const text = document.getElementById('text-input').value;
+    await tts.initialize();
+
+    // Detener reproducción anterior si existe
+    if (currentAudioSource) {
+      currentAudioSource.stop();
+      currentAudioSource = null;
+    }
+
+    // Procesar texto
+    const words = TTSUtils.tokenize(text);
+    document.getElementById('words-output').textContent = JSON.stringify(words);
+
+    const phonemes = await tts.phonemeConverter.wordsToPhonemes(words);
+    document.getElementById('phonemes-output').textContent = formatPhonemesWithPauseOutside(phonemes);
+
+    // Reproducir y guardar fuente
+    currentAudioSource = await tts.soundConverter.playPhonemes(phonemes);
+  });
+
+
+
+
+  function formatPhonemesWithPauseOutside(phonemeList, pauseId = 40) {
+  const output = [];
+  let current = [];
+
+  for (const phoneme of phonemeList) {
+    if (phoneme === pauseId) {
+      if (current.length > 0) {
+        output.push(`(${current.join(', ')})`);
+        current = [];
+      }
+      output.push(pauseId); // agregar el 40 fuera de los paréntesis
+    } else {
+      current.push(phoneme);
+    }
+  }
+
+  if (current.length > 0) {
+    output.push(`(${current.join(', ')})`);
+  }
+
+  return output.join(' ');
+  }
+
+</script>
+
 </body>
 </html>
