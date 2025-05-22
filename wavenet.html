@@ -252,6 +252,68 @@
                 max-height: 250px;
             }
         }
+
+                .spectrogram-analysis {
+            background: #1e1e1e;
+            border-radius: 12px;
+            padding: 25px;
+        }
+
+        .spectrogram-caption {
+            background: rgba(40, 40, 40, 0.7);
+            padding: 15px;
+            border-radius: 8px;
+            margin-top: 15px;
+        }
+
+        .spectrogram-caption h3 {
+            color: #FFD369;
+            font-size: 20px;
+            margin-top: 0;
+            border-bottom: 1px solid #c87100;
+            padding-bottom: 8px;
+        }
+
+        .spectrogram-caption ul {
+            padding-left: 20px;
+        }
+
+        .spectrogram-caption li {
+            margin-bottom: 8px;
+            font-size: 16px;
+            line-height: 1.5;
+        }
+
+        .technical-conclusion {
+            background: rgba(200, 113, 0, 0.1);
+            border-left: 4px solid #c87100;
+            padding: 20px;
+            margin-top: 30px;
+            border-radius: 8px;
+        }
+
+        .technical-conclusion h3 {
+            color: #FFD369;
+            margin-top: 0;
+        }
+
+        .technical-conclusion ol {
+            padding-left: 25px;
+        }
+
+        .technical-conclusion li {
+            margin-bottom: 10px;
+        }
+
+        @media (max-width: 768px) {
+            .spectrogram-caption {
+                padding: 10px;
+            }
+            
+            .spectrogram-caption li {
+                font-size: 14px;
+            }
+        }
     </style>
 </head>
 <body>
@@ -365,42 +427,50 @@ En otras palabras, de todas los posibles niveles cuantizados, el nivel 80 tiene 
 </div>
     
     <section class="card">
-        <h2>Demo Interactiva: Comparación de Técnicas</h2>
-        <div class="audio-comparison">
-            <div class="audio-sample">
-                <h3>WaveNet (Generativo)</h3>
-                <audio controls class="audio-player">
-                    <source src="audios/us-english-wavenet-1.wav" type="audio/mpeg">
-                    Tu navegador no soporta el elemento de audio.
-                </audio>
-                <p class="audio-description">Audio generado por modelo WaveNet de DeepMind</p>
+        <h2>Análisis Comparativo de Espectrogramas</h2>
+        <div class="spectrogram-analysis">
+            <div class="spectrogram-container">
+                <div class="spectrogram-item">
+                    <img src="img/ev_1/espctrogramama1.png" alt="Espectrograma WaveNet">
+                    <div class="spectrogram-caption">
+                        <h3>WaveNet (Síntesis Neuronal)</h3>
+                        <ul>
+                            <li><strong>Estructura armónica continua:</strong> Bandas de frecuencia bien definidas y estables</li>
+                            <li><strong>Transiciones suaves:</strong> Cambios graduales entre fonemas (zonas verticales)</li>
+                            <li><strong>Formantes claros:</strong> Bandas oscuras horizontales marcadas y consistentes</li>
+                            <li><strong>Energía distribuida:</strong> Patrón espectral equilibrado en todas las frecuencias</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="spectrogram-item">
+                    <img src="img/ev_1/espctrogramama2.png" alt="Espectrograma Paramétrico">
+                    <div class="spectrogram-caption">
+                        <h3>Método Paramétrico</h3>
+                        <ul>
+                            <li><strong>Artefactos de concatenación:</strong> Cortes verticales bruscos entre unidades</li>
+                            <li><strong>Inconsistencias espectrales:</strong> Formantes irregulares y discontinuos</li>
+                            <li><strong>Pérdida de detalle:</strong> Menor resolución en altas frecuencias (consonantes)</li>
+                            <li><strong>Energía concentrada:</strong> Bandas dominantes con transiciones abruptas</li>
+                        </ul>
+                    </div>
+                </div>
             </div>
             
-            <div class="audio-sample">
-                <h3>Paramétrica (Tradicional)</h3>
-                <audio controls class="audio-player">
-                    <source src="audios/us-english-parametric-1.wav" type="audio/mpeg">
-                    Tu navegador no soporta el elemento de audio.
-                </audio>
-                <p class="audio-description">Audio generado por método paramétrico tradicional</p>
+            <div class="technical-conclusion">
+                <h3>Interpretación Técnica</h3>
+                <p>La superioridad de WaveNet se evidencia en:</p>
+                <ol>
+                    <li><strong>Resolución temporal:</strong> Mayor precisión en transiciones (ej: /s/ a /a/)</li>
+                    <li><strong>Coherencia espectral:</strong> Mantiene características vocálicas durante fonación sostenida</li>
+                    <li><strong>Prosodia natural:</strong> Variaciones sutiles en intensidad y tono visibles como patrones ondulados</li>
+                    <li><strong>Armónicos completos:</strong> Estructura vertical completa en vocales (series de bandas equidistantes)</li>
+                </ol>
+                <p>Estas características explican la percepción de voz más natural y menos "robótica" en la síntesis WaveNet.</p>
             </div>
-        <p>
-            Ambos audios son muestras de Google que usan los mismas bases de datos pero las distintas síntensis, es comprobable
-            que la paramétrica a pesar de tener una buena calidad de audio al tener en Comparación a wavenet tiene flaquezas debido a 
-            tener una síntesis menos actualizada. 
-        </p>
-        <div class="spectrogram-container">
-            <div class="spectrogram-item">
-                <img src="img/ev_1/espctrogramama1.png" alt="Espectrograma WaveNet">
-                <p>Espectrograma WaveNet</p>
-            </div>
-            <div class="spectrogram-item">
-                <img src="img/ev_1/espctrogramama2.png" alt="Espectrograma Tradicional">
-                <p>Espectrograma Paramétrico</p>
-            </div>
-        </div>
         </div>
     </section>
+
 </body>
 
 <script>
