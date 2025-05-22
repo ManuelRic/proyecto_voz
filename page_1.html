@@ -40,15 +40,23 @@
         </div>
 
         <a href="wavenet.html">WaveNet</a>
+        <a href="GC_TTS.html">Google Cloud TTS</a>
         <a href="https://colab.research.google.com/drive/11VzlqzAw2NtWKHcEnRIVL6qW6t_lpUxg">Notebook</a>
         <a href="#">Bibliografía</a>
         
+        
     </nav>
-
-
+    <div id="title">
+        <h1>Objetivo</h1>
+    </div>
+    
 
     <p id="intro">
-        Hoy en día, la manera en que interactuamos con las máquinas se siente tan natural que hace unos diez años sería ciencia ficción. Uno de los grandes saltos adelante es la tecnología Text-to-Speech (TTS), o pasar texto a voz, que deja la creación de textos se conviertan en audios como si lo leyera una persona. Esta tecnología es súper importante en muchas áreas: desde ayudantes virtuales como Google Assistant o Siri, hasta programas que leen la pantalla para gente con problemas de visión, sin olvidar los GPS, las voces automatizadas que oímos al llamar a algún sitio, los juegos o la creación de videos y demás contenidos. Con el tiempo, la forma en que se crea la voz artificial ha ido cambiando, desde juntar pedacitos de voz grabada hasta usar modelos neuronales complicados que pueden generar voces que suenan naturales, con su ritmo, su entonación y hasta sus emociones. Aquí destacan tecnologías como Tacotron y WaveNet, creadas por Google, que han cambiado por completo cómo se hace el habla artificial. Este trabajo busca averiguar cómo funcionan los sistemas TTS, centrándonos en cómo lo hace Google Cloud Text-to-Speech, mirando sus partes internas, los modelos que usa y cómo se puede personalizar la voz. También hablaremos de los desafíos que hay ahora, los problemas éticos de esta tecnología y cómo está cambiando nuestra relación con la inteligencia artificial. 
+        Nuestro proyecto trata sobre los sistemas <i>Text To Speech</i>, y nuestra intención es ofrecer una visión clara de cómo ha progresado esta tecnología 
+        a lo largo del tiempo, destacando los avances más novedosos relacionados con la síntesis neuronal, los distintos enfoques técnicos que han surgido, y las características que los diferencian entre sí. 
+        Además, nuestro objetivo no es solo ofreceros una explicación teórica, sino también facilitar una experiencia interactiva. Para ello, hemos diseñado una página web en la que podáis 
+        experimentar de forma práctica con diferentes ejemplos y herramientas que os proporcionamos. Así, podréis comprobar por vuestra propia mano cómo se transforma un texto en voz y 
+        cómo varían los resultados según el tipo de sistema utilizado.
     </p>
 
     <h2>Evolución</h2>
@@ -63,29 +71,34 @@
     <div class="synthesis-container">
         <div class="synthesis-section" id="SC">
             <h3><span class="sintesis">Síntesis</span> <span class="glitch-text">Concatenativa</span></h3>
-            <p>Los primeros sistemas de síntesis de voz (TTS) funcionaban mediante la concatenación de fragmentos de audio grabados por una persona real. En este enfoque, se creaba una base de datos con pequeños fragmentos de sonido correspondientes a palabras, sílabas o fonemas. Cuando el sistema debía leer un texto, buscaba y unía estos fragmentos para formar las palabras y frases deseadas, como si se estuviera armando un rompecabezas de sonidos. Aunque este método permitió crear voces sintéticas, presentaba limitaciones, como la falta de fluidez y naturalidad en las transiciones entre los sonidos, así como una flexibilidad limitada para generar frases no previamente grabadas. A medida que la tecnología avanzaba, surgieron nuevos métodos como la síntesis paramétrica y, más recientemente, la síntesis neural, que han permitido desarrollar sistemas TTS mucho más naturales, capaces de imitar las variaciones de la voz humana en cuanto a entonación, ritmo y emociones.</p>
+            <p>Los primeros sistemas <i>Text To Speech</i> funcionaban mediante la concatenación de fragmentos de audio grabados por una persona real.
+                En este enfoque, se creaba una base de datos con pequeños fragmentos de sonido que correspondian a palabras, sílabas o fonemas y cuando el sistema debía leer un texto,
+                buscaba y unía estos fragmentos para formar las palabras y frases, como si fuera un puzzle.
+                </p>
+                <p>Aunque este método permite crear voces sintéticas, presentaba limitaciones que se notaban en
+                la falta de fluidez y naturalidad de las transiciones entre los sonidos y tiene problemas para generar frases no previamente definidas.
+                A medida que la tecnología avanzaba, surgieron nuevos métodos como la síntesis paramétrica y, la novedad actual, la síntesis neural, que han permitido desarrollar
+                sistemas <i>Text To Speech</i> mucho más naturales, capaces de imitar la voz humana</p>
             <ul>
                 <li>
                     <span class="v_p">Ventajas:</span>
-                    <ul>
-                        <li>Produce una voz muy natural si las unidades grabadas encajan bien, ya que utiliza fragmentos reales de voz humana.</li>
-                        <li>No requiere tanta capacidad de cómputo como los modelos neuronales modernos.</li>
-                        <li>Calidad consistente en contextos controlados o frases predefinidas.</li>
-                        <li>Buena opción cuando se necesita una voz fija con alta fidelidad en un dominio limitado.</li>
-                    </ul>
+                    <p class="p_vd">La principal ventaja de la síntesis de voz concatenativa reside en la posibilidad de generar audio a partir de texto de una forma muy sencilla y que puede 
+                        llegar a cumplir con una calidad media, especialmente si las unidades concatenadas han sido grabadas en contextos fonéticos similares. 
+                        Además, una vez desarrollado, este sistema puede funcionar de manera bastante eficiente en tiempo real, sin necesidad de gran poder de cómputo, 
+                        lo que lo hace adecuado para dispositivos con recursos limitados.</p>
                 </li>
                 <li>
                     <span class="v_p">Problemas:</span>
-                    <ul>
-                        <li>Falta de flexibilidad: depende completamente de las grabaciones existentes, lo que limita la variación y expresividad.</li>
-                        <li>Puede generar saltos o discontinuidades en la voz cuando las unidades no se empalman perfectamente.</li>
-                        <li>No escala bien a múltiples idiomas o voces sin grabar grandes bases de datos específicas.</li>
-                        <li>El almacenamiento de todas las unidades de audio puede requerir mucho espacio si se busca cobertura amplia.</li>
-                    </ul>
+                    <p class="p_vd">Sin embargo, este enfoque presenta importantes limitaciones. Uno de sus principales inconvenientes es que al depender de una base de datos de 
+                        grabaciones, la voz sintetizada solo puede reproducir combinaciones que ya estén incluidas o que puedan construirse a partir los archivos guardados. 
+                        Esto provoca transiciones poco naturales entre fragmento y si las condiciones acústicas no coinciden perfectamente puede empeorar más. Además, requiere 
+                        de esfuerzo en el proceso de grabación y el etiquetado inicial puede ser tedioso. Por último, no es posible modificar el estilo, la entonación o la emoción 
+                        del habla sin rehacer las muestra de audio.</p>
                 </li>
             </ul>
 
             <button id="test_button_c">¡Pruebalo!</button>
+            
         </div>
         
         <div class="synthesis-section" id="SP">

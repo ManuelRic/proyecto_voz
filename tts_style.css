@@ -32,6 +32,13 @@ p{
     margin-right: 60px;
 }
 
+.p_vd{
+    margin-left: 40px;
+    margin-top: 5px;
+    font-size: 18px;
+    color: #ffb656; 
+}
+
 #intro{
     margin-bottom: 70px;
 }
@@ -48,8 +55,8 @@ h2 {
 }
 
 h3 {
-    margin-left: 15px;
-    color: #FFD369; 
+   margin-left: 15px;
+    color: #FFD369;  
     font-size: 20px;
 }
 
@@ -298,9 +305,25 @@ li{
     align-items: center;
 }
 
-h1 {
+div h1 {
     font-size: 100px;
     color: #c87100;
+    padding: 0;
+    margin: 0;
+    display: flex; /* Use flex to make children align inline */
+    position: relative;
+}
+
+#title{ /* Initially hide all sections */
+    overflow-y: auto;
+    margin: 20px 0 -10px 20px;
+
+}
+
+
+h1 {
+    font-size: 80px;
+    color: #FFD369; 
     padding: 0;
     margin: 0;
     display: flex; /* Use flex to make children align inline */

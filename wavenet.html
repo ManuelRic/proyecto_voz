@@ -208,6 +208,112 @@
         audio::-webkit-media-controls-mute-button {
             filter: invert(80%);
         }
+        .spectrogram-container {
+            display: flex;
+            justify-content: space-around;
+            align-items: flex-start;
+            gap: 30px;
+            margin: 30px 0;
+        }
+
+        .spectrogram-item {
+            flex: 1;
+            min-width: 0;
+            text-align: center;
+        }
+
+        .spectrogram-item img {
+            max-height: 400px;
+            width: auto;
+            max-width: 100%;
+            border: 1px solid #444;
+            border-radius: 4px;
+        }
+
+        .spectrogram-item p {
+            margin-top: 10px;
+            color: #BBBBBB;
+            font-size: 16px;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .spectrogram-container {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .spectrogram-item {
+                width: 100%;
+                margin-bottom: 20px;
+            }
+            
+            .spectrogram-item img {
+                max-height: 250px;
+            }
+        }
+
+                .spectrogram-analysis {
+            background: #1e1e1e;
+            border-radius: 12px;
+            padding: 25px;
+        }
+
+        .spectrogram-caption {
+            background: rgba(40, 40, 40, 0.7);
+            padding: 15px;
+            border-radius: 8px;
+            margin-top: 15px;
+        }
+
+        .spectrogram-caption h3 {
+            color: #FFD369;
+            font-size: 20px;
+            margin-top: 0;
+            border-bottom: 1px solid #c87100;
+            padding-bottom: 8px;
+        }
+
+        .spectrogram-caption ul {
+            padding-left: 20px;
+        }
+
+        .spectrogram-caption li {
+            margin-bottom: 8px;
+            font-size: 16px;
+            line-height: 1.5;
+        }
+
+        .technical-conclusion {
+            background: rgba(200, 113, 0, 0.1);
+            border-left: 4px solid #c87100;
+            padding: 20px;
+            margin-top: 30px;
+            border-radius: 8px;
+        }
+
+        .technical-conclusion h3 {
+            color: #FFD369;
+            margin-top: 0;
+        }
+
+        .technical-conclusion ol {
+            padding-left: 25px;
+        }
+
+        .technical-conclusion li {
+            margin-bottom: 10px;
+        }
+
+        @media (max-width: 768px) {
+            .spectrogram-caption {
+                padding: 10px;
+            }
+            
+            .spectrogram-caption li {
+                font-size: 14px;
+            }
+        }
     </style>
 </head>
 <body>
@@ -224,7 +330,7 @@
             <h2>¿Qué es?</h2>
             <div class="card-content">
                 <p>
-                    WaveNet es un modelo generativo autoregresivo desarrollado por DeepMind que produce directamente ondas de audio crudas (*raw waveforms*). A diferencia de los métodos tradicionales que utilizan concatenación o vocoders paramétricos, WaveNet genera audio muestra por muestra, modelando su distribución probabilística condicional de forma precisa.
+                    WaveNet es un modelo generativo autoregresivo desarrollado por DeepMind que produce directamente ondas de audio crudas (*raw waveforms*). A diferencia de los métodos tradicionales que utilizan concatenación o vocoders paramétricos, WaveNet genera audio muestra por muestra, modelando su distribución probabilística condicional de forma precisa, es decir, es un modelo basado en la síntesis neuronal.
                 </p>
             </div>
         </section>
@@ -248,13 +354,22 @@
         <section class="section">
             <h2>Distribuciones Softmax</h2>
             <p>
-                Para modelar la distribución de convoluciones causales dilatadas <span class="tooltip">(Distribución Condicional)</span> usamos la función Softmax ya que puede manejar una gran cantidad de posibles valores de salida y es lo suficientemente flexible para capturar la complejidad de las señales de audio.
+                 La función softmax es una función matemática que convierte un vector de números reales en una distribución de probabilidad. 
+                 Es ampliamente utilizada en redes neuronales, especialmente en las capas de salida cuando se quiere modelar una variable categórica, 
+                 como en la generación de texto o audio donde hay que elegir el siguiente símbolo (por ejemplo, una muestra de audio cuantizada).
+                 Para modelar la distribución de convoluciones causales dilatadas <span class="tooltip">(Distribución Condicional)</span>
+                 usamos la función Softmax ya que puede manejar una gran cantidad de posibles valores de salida y es lo suficientemente flexible para 
+                 capturar la complejidad de las señales de audio. 
             </p>
             <p>
-                Antes de aplicar la función Softmax, los valores de audio se transforman utilizando la µ-law (ley A), dónde μ = 255. Después de aplicar µ-law, los valores de audio transformados se cuantizan y en el caso de WaveNet, se cuantiza con 256 niveles.
+                Antes de aplicar la función Softmax, los valores de audio se transforman utilizando la µ-law (ley A), dónde μ = 255. Después de aplicar µ-law,
+                 los valores de audio transformados se cuantizan y en el caso de WaveNet, se cuantiza con 256 niveles.
             </p>
             <p>
-                Después de cuantizar la señal de audio, cada valor cuantizado representa un nivel diferente. La función Softmax convierte los logits (valores de entrada) en probabilidades para cada uno de los niveles. La función asegura que la suma de todas las probabilidades sea igual a 1, permitiendo interpretar los valores como probabilidades de pertenencia a cada uno de los 256 niveles.
+                Después de cuantizar la señal de audio, cada valor cuantizado representa un nivel diferente. 
+                La función Softmax convierte los logits (valores de entrada) en probabilidades para cada uno de los niveles además se asegura
+                 que la suma de todas las probabilidades sea igual a 1, permitiendo interpretar los valores como probabilidades 
+                de pertenencia a cada uno de los 256 niveles.
             </p>
             <div style="text-align: center;justify-content: center;">
             <img src="img/ev_1/wavenet_3.png">
@@ -266,11 +381,29 @@ En otras palabras, de todas los posibles niveles cuantizados, el nivel 80 tiene 
             </p>
         </section>
 
+    <section class="section">
+        <h2>Context stacks</h2>
+        <p>
+            Los Context Stacks son una estructura complementaria que se añade encima del WaveNet principal para aumentar aún más su capacidad para capturar dependencias a largo plazo,
+            con ello logramos recordar y usar información de eventos pasados lejanos en el tiempo, cuando está generando o procesando una nueva parte de la señal.
+        </p>
+        <ul>
+            <li>Mantener coherencia en el tono.</li>
+            <li>Recordar dónde están las pausas.</li>
+            <li>Adaptar la entonación final como en una pregunta (en “¿cómo estás?”).</li>
+            <li>Usar un ritmo y prosodia natural desde el principio hasta el final.</li>
+        </ul>
+        <p>
+            Esto ayuda a que al haccer la narración del texto suene fluido sin y natural con pausas del habla imitando el compartamiento más humano.
+            Aunque WaveNet ya usa convoluciones dilatadas para aumentar su campo de visión, añadir estas capas ayuda a no aumentar tanto el coste computacional.   
+        </p>
+    </section>
 
     <section class="section">
         <h2>Redes de Ondas Condicionales</h2>
         <p>
-            WaveNet puede ser extendido para generar audio condicionado a diferentes tipos de entradas. Estas <span class="highlight">redes de ondas condicionales</span> permiten que el modelo produzca diferentes resultados basados en contexto adicional.
+            WaveNet puede ser extendido para generar audio condicionado a diferentes tipos de entradas. Estas <span class="highlight">redes de ondas condicionales</span>
+             permiten que el modelo produzca diferentes resultados basados en contexto adicional.
         </p>
         <ul>
             <li><b>Texto</b>: Condicionamiento con embeddings de texto para síntesis de voz (TTS).</li>
@@ -278,33 +411,66 @@ En otras palabras, de todas los posibles niveles cuantizados, el nivel 80 tiene 
             <li><b>Etiquetas musicales</b>: Para generar música específica por género o instrumento.</li>
         </ul>
     </section>
+    <section class="section">
+        <h2>Modelos complementarios</h2>
+        <p>
+            Tacotron es un modelo secuencia-a-secuencia (seq2seq) que convierte texto directamente en espectrogramas mel, 
+            los cuales luego pueden ser transformados en audio usando WaveNet como vocoder. Este enfoque combinado es la base 
+            de sistemas como Google Cloud TTS.
+        </p>
+        <ul>
+            <li><strong>Arquitectura:</strong> Usa redes neuronales recurrentes (RNN) y atención para alinear texto con características acústicas.</li>
+            <li><strong>Integración con WaveNet:</strong> Tacotron 2 genera espectrogramas mel que WaveNet convierte en ondas de audio realistas.</li>
+        </ul>
+    </section>
 
 </div>
     
     <section class="card">
-        <h2>Demo Interactiva: Comparación de Técnicas</h2>
-        <div class="audio-comparison">
-            <!-- WaveNet -->
-            <div class="audio-sample">
-                <h3>WaveNet (Generativo)</h3>
-                <audio controls class="audio-player">
-                    <source src="audios/us-english-wavenet-1.wav" type="audio/mpeg">
-                    Tu navegador no soporta el elemento de audio.
-                </audio>
-                <p class="audio-description">Audio generado por modelo WaveNet de DeepMind</p>
+        <h2>Análisis Comparativo de Espectrogramas</h2>
+        <div class="spectrogram-analysis">
+            <div class="spectrogram-container">
+                <div class="spectrogram-item">
+                    <img src="img/ev_1/espctrogramama1.png" alt="Espectrograma WaveNet">
+                    <div class="spectrogram-caption">
+                        <h3>WaveNet (Síntesis Neuronal)</h3>
+                        <ul>
+                            <li><strong>Estructura armónica continua:</strong> Bandas de frecuencia bien definidas y estables</li>
+                            <li><strong>Transiciones suaves:</strong> Cambios graduales entre fonemas (zonas verticales)</li>
+                            <li><strong>Formantes claros:</strong> Bandas oscuras horizontales marcadas y consistentes</li>
+                            <li><strong>Energía distribuida:</strong> Patrón espectral equilibrado en todas las frecuencias</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="spectrogram-item">
+                    <img src="img/ev_1/espctrogramama2.png" alt="Espectrograma Paramétrico">
+                    <div class="spectrogram-caption">
+                        <h3>Método Paramétrico</h3>
+                        <ul>
+                            <li><strong>Artefactos de concatenación:</strong> Cortes verticales bruscos entre unidades</li>
+                            <li><strong>Inconsistencias espectrales:</strong> Formantes irregulares y discontinuos</li>
+                            <li><strong>Pérdida de detalle:</strong> Menor resolución en altas frecuencias (consonantes)</li>
+                            <li><strong>Energía concentrada:</strong> Bandas dominantes con transiciones abruptas</li>
+                        </ul>
+                    </div>
+                </div>
             </div>
             
-            <!-- Concatenativo -->
-            <div class="audio-sample">
-                <h3>Concatenativo (Tradicional)</h3>
-                <audio controls class="audio-player">
-                    <source src="audios/us-english-concatenative-1.wav" type="audio/mpeg">
-                    Tu navegador no soporta el elemento de audio.
-                </audio>
-                <p class="audio-description">Audio generado por método concatenativo tradicional</p>
+            <div class="technical-conclusion">
+                <h3>Interpretación Técnica</h3>
+                <p>La superioridad de WaveNet se evidencia en:</p>
+                <ol>
+                    <li><strong>Resolución temporal:</strong> Mayor precisión en transiciones (ej: /s/ a /a/)</li>
+                    <li><strong>Coherencia espectral:</strong> Mantiene características vocálicas durante fonación sostenida</li>
+                    <li><strong>Prosodia natural:</strong> Variaciones sutiles en intensidad y tono visibles como patrones ondulados</li>
+                    <li><strong>Armónicos completos:</strong> Estructura vertical completa en vocales (series de bandas equidistantes)</li>
+                </ol>
+                <p>Estas características explican la percepción de voz más natural y menos "robótica" en la síntesis WaveNet.</p>
             </div>
         </div>
     </section>
+
 </body>
 
 <script>

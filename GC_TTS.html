@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Google Cloud Text-to-Speech</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body {
+            background: linear-gradient(135deg, #27230f, #80733d, #938140);
+            color: #f0f0f0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 30px;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        h1 {
+            font-size: 48px;
+            color: #FFD369;
+            margin: 0;
+        }
+
+        .section {
+            background: #1e1e1e;
+            border-radius: 12px;
+            padding: 25px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+            margin-bottom: 30px;
+            border-left: 4px solid #c87100;
+        }
+
+        h2 {
+            color: #c87100;
+            font-size: 24px;
+            border-bottom: 2px solid #FFD369;
+            padding-bottom: 8px;
+            margin-top: 0;
+        }
+
+        p, li {
+            font-size: 18px;
+            line-height: 1.6;
+        }
+
+        ul {
+            padding-left: 20px;
+        }
+
+        li::marker {
+            color: #FFD369;
+        }
+
+        footer {
+            text-align: center;
+            margin-top: 50px;
+            font-size: 14px;
+            color: #aaa;
+        }
+        
+        .audio-player {
+            width: 100%;
+            margin: 10px 0;
+        }
+
+        h3 {
+            color: #FFD369;
+            font-size: 28px;
+            text-align: center;
+            margin: 30px 0 20px;
+            position: relative;
+            padding-bottom: 10px;
+        }
+
+        h3::after {
+            content: "";
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 3px;
+            background: linear-gradient(to right, transparent, #c87100, transparent);
+        }
+
+        .section {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .section:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4);
+        }
+
+        .audio-player {
+            background: #2a2a2a;
+            border-radius: 8px;
+            padding: 10px;
+            margin: 20px 0;
+            width: calc(100% - 20px);
+        }
+
+        /* Estilos para los controles nativos de audio */
+        audio::-webkit-media-controls-panel {
+            background: #333;
+            border-radius: 5px;
+        }
+
+        audio::-webkit-media-controls-play-button,
+        audio::-webkit-media-controls-mute-button {
+            filter: invert(80%);
+        }
+
+        textarea {
+        width: 90%;
+        max-width: 100%;
+        padding: 15px;
+        font-size: 16px;
+        border: 2px solid #ccc;
+        border-radius: 10px;
+        resize: vertical;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+        }
+
+        .section textarea, #speak_button {
+        display: block;
+        margin: 0 auto;
+        }
+
+        
+
+        #speak_button{
+        cursor: pointer;
+        filter: invert(90%);
+        width: 65px;
+        }
+
+        #speak_button:hover{
+        filter: invert(80%);
+        }
+
+        #phoneme-help-container {
+        position: relative;
+        text-align: center;
+        margin: 20px auto;
+        }
+
+        #show-phoneme-help {
+        background-color: #c87100;
+        color: white;
+        border: none;
+        padding: 10px 16px;
+        border-radius: 8px;
+        font-size: 16px;
+        cursor: pointer;
+        }
+
+        #phoneme-tooltip {
+        display: none;
+        position: absolute;
+        top: 100%;
+        left: 50%;
+        transform: translateX(-50%);
+        background-color: #1e1e1e;
+        color: #FFD369;
+        border: 1px solid #c87100;
+        padding: 12px;
+        border-radius: 10px;
+        margin-top: 8px;
+        z-index: 100;
+        width: 600px; /* ⬅️ Aumentamos el ancho */
+        max-height: unset; /* elimina el límite de altura */
+        overflow-y: visible; /* permite que se vea toda la tabla sin scroll */
+        box-shadow: 0 4px 20px rgba(0,0,0,0.4);
+        }
+
+        #phoneme-tooltip table {
+        width: 100%;
+        border-collapse: collapse;
+        font-size: 16px;
+        }
+
+        #phoneme-tooltip th, #phoneme-tooltip td {
+        padding: 8px 14px;
+        text-align: left;
+        }
+
+        #phoneme-tooltip tr:nth-child(even) {
+        background-color: #2a2a2a;
+        }
+
+        #phoneme-tooltip {
+        width: 60em;
+        max-width: 90vw;
+        }
+
+        a {
+        color: #FFD369;
+        text-decoration: none;
+        font-weight: bold;
+        border-bottom: 2px solid transparent;
+        transition: border-color 0.3s, color 0.3s;
+        }
+
+        a:hover {
+        color: #ffffff;
+        border-bottom: 2px solid #FFD369;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Google Cloud TTS</h1>
+            <p>Explicación del funcionamiento del TTS de Google</p>
+        </header>
+
+        <section class="section">
+            <h2>Qué es y cómo funciona Google Cloud TTS</h2>
+            <p>Google Cloud Text-to-Speech es un servicio de síntesis de voz basado en la nube que utiliza inteligencia artificial 
+                para convertir texto en habla natural. Ofrece dos tipos de voces:</p>
+                <ul>
+                    <li>
+                        Voces WaveNet: Tecnología avanzada basada en redes neuronales profundas 
+                        (la arquitectura WaveNet original de DeepMind), que produce audio con calidad casi humana.
+                    </li>
+                    <li>
+                        Voces estándar: Síntesis tradicional de alta calidad pero menos natural que WaveNet.
+                    </li>
+ 
+                </ul>
+
+                Características principales:
+                <ul>
+                    <li>
+                        Soporta más de 220 voces en 40+ idiomas
+                    </li>
+                    <li>
+                        Permite ajustar tono, velocidad de habla y volumen
+                    </li>
+                    <li>
+                        Soporta SSML (Speech Synthesis Markup Language) para control avanzado
+                    </li>
+                    <li>
+                        Ofrece audio en varios formatos (MP3, WAV, OGG)
+                    </li>
+                    <li>
+                        Incluye funciones de personalización de voz para empresas
+                    </li>
+                </ul>                
+            </p>
+
+            
+        </section>
+        <h3>Funcionamiento</h3>
+
+        <section class="section">
+            <h2>1. Entrada y análisis lingüístico</h2>
+            <p>Google Cloud TTS recibe una cadena de texto plano o una entrada estructurada en SSML (Speech Synthesis Markup Language), 
+                lo cual permite controlar detalles como pausas, énfasis o pronunciación personalizada.</p>
+            <p>El sistema analiza el texto para:</p>
+            <ul>
+                <li>Separar frases y oraciones.</li>
+                <li>Detectar idioma y dialecto.</li>
+                <li>Determinar pronunciaciones correctas (homónimos, números, nombres).</li>
+                <li>Aplicar reglas gramaticales y fonéticas según el idioma.</li>
+            </ul>
+        </section>
+
+        <section class="section">
+            <h2>2. Conversión texto a fonemas (TTP)</h2>
+            <p>El texto se convierte en una representación fonética que indica cómo deben sonar las palabras. Este paso es clave y altamente dependiente del idioma y su acento regional.</p>
+            <textarea id="text-input" rows="4" cols="50">Cambia el texto y comprueba la explicación.</textarea><br>
+            <img id="speak_button" src="img/ev_1/play.png">
+
+            <div style="text-align: center; color: white; margin-top: 20px;">
+                <h2>Fonemas:</h2>
+                <p id="phonemes-output"></p>
+            </div>
+
+
+            <div id="phoneme-help-container">
+            <button id="show-phoneme-help">¿Qué significan los fonemas?</button>
+            <div id="phoneme-tooltip">
+                <table>
+                <tbody id="phoneme-table-body"></tbody>
+                </table>
+            </div>
+            </div>
+
+
+        </section>
+
+        <section class="section">
+            <h2>3. Síntesis de voz</h2>
+            <p>Google Cloud ofrece dos enfoques principales:</p>
+            <ul>
+                <li><strong>Concatenativa</strong>: Combina fragmentos pregrabados.</li>
+                <li><strong>Neuronal (Tacotron + WaveNet)</strong>: 
+                    <ul>
+                        <li>Tacotron transforma el texto en espectrogramas mel (representación intermedia).</li>
+                        <li>WaveNet convierte esos espectrogramas en audio de alta calidad.</li>
+                    </ul>
+                </li>
+            </ul>
+
+            <p>En el siguiente <a href="https://colab.research.google.com/drive/13jolfG1bLVVCLYKXsVZ6GaKo4hjqovxI?usp=sharing" target="_blank">cuaderno</a> puedes encontrar un ejemplo del funcionamiento de Tacotron2 y generar tus propios espectrogramas. </p>
+        </section>
+
+        <section class="section">
+            <h2>4. Post-procesamiento</h2>
+            <p>El audio final se ajusta según las preferencias del usuario:</p>
+            <ul>
+                <li>Velocidad de habla.</li>
+                <li>Tono o entonación.</li>
+                <li>Volumen.</li>
+                <li>Efectos adicionales (opcional).</li>
+            </ul>
+        </section>
+
+        <section class="section">
+            <h2>Audio creado con Google Cloud</h2>
+            <audio controls class="audio-player">
+                <source src="audios/synthesis.wav" type="audio/mpeg">
+                Tu navegador no soporta el elemento de audio.
+            </audio>
+        </section>  
+    </div>
+
+    <script type="module">
+    import TextToSpeech, { TTSUtils, Phonemes } from './main.js';
+
+    const tts = new TextToSpeech({ debug: true });
+
+    function removeAccents(str) {
+        return str.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+    }
+
+    document.getElementById('speak_button').addEventListener('click', async () => {
+        const rawText = document.getElementById('text-input').value;
+        const text = removeAccents(rawText);
+        
+        await tts.initialize();
+
+        // Procesar texto
+        const words = TTSUtils.tokenize(text);
+
+        const phonemes = await tts.phonemeConverter.wordsToPhonemes(words);
+        document.getElementById('phonemes-output').textContent = formatPhonemesWithPauseOutside(phonemes);
+    });
+
+    function formatPhonemesWithPauseOutside(phonemeList, pauseId = 40) {
+        const output = [];
+        let current = [];
+
+        for (const phoneme of phonemeList) {
+        if (phoneme === pauseId) {
+            if (current.length > 0) {
+            output.push(`(${current.join(', ')})`);
+            current = [];
+            }
+            output.push(pauseId); // Pausa fuera de paréntesis
+        } else {
+            current.push(phoneme);
+        }
+        }
+
+        if (current.length > 0) {
+        output.push(`(${current.join(', ')})`);
+        }
+
+        return output.join(' ');
+    }
+
+    // Mostrar la tabla con 4 fonemas por fila
+    const tableBody = document.getElementById('phoneme-table-body');
+    const entries = Object.entries(Phonemes);
+
+    for (let i = 0; i < entries.length; i += 4) {
+    const row = document.createElement('tr');
+
+    for (let j = 0; j < 4; j++) {
+        const entry = entries[i + j];
+        if (entry) {
+        const [name, value] = entry;
+        row.innerHTML += `<td><strong>${value}</strong></td><td>${name}</td>`;
+        } else {
+        // Celda vacía si no hay más fonemas
+        row.innerHTML += `<td></td><td></td>`;
+        }
+    }
+
+    tableBody.appendChild(row);
+    }
+
+
+
+
+    //Boton para mostrar la tabla
+    const helpButton = document.getElementById('show-phoneme-help');
+    const tooltip = document.getElementById('phoneme-tooltip');
+
+    // Mostrar al pasar el ratón por el botón
+    helpButton.addEventListener('mouseenter', () => {
+    tooltip.style.display = 'block';
+    });
+
+    // Ocultar solo cuando el mouse salga tanto del botón como de la tabla
+    let hideTimeout;
+
+    function scheduleHideTooltip() {
+    hideTimeout = setTimeout(() => {
+        tooltip.style.display = 'none';
+    }, 200);
+    }
+
+    function cancelHideTooltip() {
+    clearTimeout(hideTimeout);
+    }
+
+    // Ocultar al salir del botón (si no entra al tooltip)
+    helpButton.addEventListener('mouseleave', scheduleHideTooltip);
+
+    // Cancelar si entra al tooltip
+    tooltip.addEventListener('mouseenter', cancelHideTooltip);
+
+    // Ocultar si sale del tooltip también
+    tooltip.addEventListener('mouseleave', scheduleHideTooltip);
+
+
+    </script>
+
+
+</body>
+</html>
