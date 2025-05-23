@@ -216,6 +216,20 @@
         border-bottom: 2px solid #FFD369;
         }
 
+        #back_button{
+            cursor: pointer;
+            position:fixed;
+            top: 0;
+            left: 0;
+            filter: invert(100%);
+            width: 80px;
+            margin: 20px;
+        }
+        
+        #back_button:hover{
+            filter: invert(80%);
+        }
+
     </style>
 </head>
 <body>
@@ -224,6 +238,8 @@
             <h1>Google Cloud TTS</h1>
             <p>Explicación del funcionamiento del TTS de Google</p>
         </header>
+
+        <img id="back_button" src="img/ev_1/home.png">
 
         <section class="section">
             <h2>Qué es y cómo funciona Google Cloud TTS</h2>
