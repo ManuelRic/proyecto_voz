@@ -426,50 +426,82 @@ En otras palabras, de todas los posibles niveles cuantizados, el nivel 80 tiene 
 
 </div>
     
-    <section class="card">
-        <h2>Análisis Comparativo de Espectrogramas</h2>
-        <div class="spectrogram-analysis">
-            <div class="spectrogram-container">
-                <div class="spectrogram-item">
-                    <img src="img/ev_1/espctrogramama1.png" alt="Espectrograma WaveNet">
-                    <div class="spectrogram-caption">
-                        <h3>WaveNet (Síntesis Neuronal)</h3>
-                        <ul>
-                            <li><strong>Estructura armónica continua:</strong> Bandas de frecuencia bien definidas y estables</li>
-                            <li><strong>Transiciones suaves:</strong> Cambios graduales entre fonemas (zonas verticales)</li>
-                            <li><strong>Formantes claros:</strong> Bandas oscuras horizontales marcadas y consistentes</li>
-                            <li><strong>Energía distribuida:</strong> Patrón espectral equilibrado en todas las frecuencias</li>
-                        </ul>
-                    </div>
-                </div>
-                
-                <div class="spectrogram-item">
-                    <img src="img/ev_1/espctrogramama2.png" alt="Espectrograma Paramétrico">
-                    <div class="spectrogram-caption">
-                        <h3>Método Paramétrico</h3>
-                        <ul>
-                            <li><strong>Artefactos de concatenación:</strong> Cortes verticales bruscos entre unidades</li>
-                            <li><strong>Inconsistencias espectrales:</strong> Formantes irregulares y discontinuos</li>
-                            <li><strong>Pérdida de detalle:</strong> Menor resolución en altas frecuencias (consonantes)</li>
-                            <li><strong>Energía concentrada:</strong> Bandas dominantes con transiciones abruptas</li>
-                        </ul>
-                    </div>
+<section class="card">
+    <h2>Demo Comparativa: WaveNet vs Síntesis Paramétrica</h2>
+    
+    <!-- Comparación de Audios -->
+    <div class="audio-comparison">
+        <div class="audio-sample">
+            <h3>WaveNet (Síntesis Neuronal)</h3>
+            <audio controls class="audio-player">
+                <source src="audios/us-english-wavenet-1.wav" type="audio/wav">
+                Tu navegador no soporta el elemento de audio.
+            </audio>
+            <p class="audio-description">Tecnología generativa basada en redes neuronales profundas</p>
+        </div>
+        
+        <div class="audio-sample">
+            <h3>Método Paramétrico</h3>
+            <audio controls class="audio-player">
+                <source src="audios/us-english-parametric-1.wav" type="audio/wav">
+                Tu navegador no soporta el elemento de audio.
+            </audio>
+            <p class="audio-description">Síntesis tradicional basada en unidades acústicas</p>
+        </div>
+    </div>
+
+    <!-- Explicación de diferencias auditivas -->
+    <div class="audio-differences">
+        <h3>Diferencias Audibles</h3>
+        <ul>
+            <li><strong>Naturalidad:</strong> WaveNet presenta variaciones micro-prosódicas imperceptibles en el método paramétrico</li>
+            <li><strong>Transiciones:</strong> Los fonemas se conectan fluidamente en WaveNet versus cortes perceptibles en el paramétrico</li>
+            <li><strong>Respiración:</strong> WaveNet modela sutiles sonidos de aspiración que dan realismo</li>
+        </ul>
+    </div>
+
+    <!-- Análisis de Espectrogramas -->
+    <div class="spectrogram-analysis">
+        <h3>Análisis Visual de Espectrogramas</h3>
+        <div class="spectrogram-container">
+            <div class="spectrogram-item">
+                <img src="img/ev_1/espctrogramama1.png" alt="Espectrograma WaveNet">
+                <div class="spectrogram-caption">
+                    <h4>Características WaveNet</h4>
+                    <ul>
+                        <li><strong>Estructura armónica limpia:</strong> Bandas de frecuencia paralelas y continuas</li>
+                        <li><strong>Transiciones suaves:</strong> Cambios graduales entre consonantes y vocales</li>
+                        <li><strong>Detalle en altas frecuencias:</strong> Componentes de fricación bien definidos (/s/, /f/)</li>
+                    </ul>
                 </div>
             </div>
             
-            <div class="technical-conclusion">
-                <h3>Interpretación Técnica</h3>
-                <p>La superioridad de WaveNet se evidencia en:</p>
-                <ol>
-                    <li><strong>Resolución temporal:</strong> Mayor precisión en transiciones (ej: /s/ a /a/)</li>
-                    <li><strong>Coherencia espectral:</strong> Mantiene características vocálicas durante fonación sostenida</li>
-                    <li><strong>Prosodia natural:</strong> Variaciones sutiles en intensidad y tono visibles como patrones ondulados</li>
-                    <li><strong>Armónicos completos:</strong> Estructura vertical completa en vocales (series de bandas equidistantes)</li>
-                </ol>
-                <p>Estas características explican la percepción de voz más natural y menos "robótica" en la síntesis WaveNet.</p>
+            <div class="spectrogram-item">
+                <img src="img/ev_1/espctrogramama2.png" alt="Espectrograma Paramétrico">
+                <div class="spectrogram-caption">
+                    <h4>Limitaciones Paramétricas</h4>
+                    <ul>
+                        <li><strong>Artefactos de concatenación:</strong> Líneas verticales marcadas entre unidades</li>
+                        <li><strong>Pérdida de armónicos:</strong> Bandas de frecuencia interrumpidas</li>
+                        <li><strong>Falta de detalle:</strong> Áreas borrosas en consonantes fricativas</li>
+                    </ul>
+                </div>
             </div>
         </div>
-    </section>
+    </div>
+
+    <!-- Conclusión Técnica -->
+    <div class="technical-summary">
+        <h3>Interpretación Científica</h3>
+        <p>Los espectrogramas revelan cómo WaveNet supera las limitaciones del método paramétrico:</p>
+        <ol>
+            <li><strong>Modelado de onda completa:</strong> Generación muestral que preserva micro-detalles acústicos</li>
+            <li><strong>Campos receptivos dilatados:</strong> Capacidad para mantener coherencia a largo plazo</li>
+            <li><strong>Distribuciones condicionales:</strong> Softmax de 256 niveles captura nuances espectrales</li>
+        </ol>
+        <p>Esta superioridad técnica se traduce en una experiencia auditiva indistinguible de voz humana en aplicaciones reales.</p>
+    </div>
+</section>
 
 </body>
 
