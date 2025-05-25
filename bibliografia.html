@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Bibliografía</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+    #bibliografia {
+        margin-top: 50px;
+    }
+
+    .bibliography-container h3 {
+        color: #FFD369;
+        border-bottom: 1px solid #c87100;
+        padding-bottom: 5px;
+        margin: 25px 0 15px;
+    }
+
+    .bibliography-list {
+        list-style-type: none;
+        padding-left: 0;
+    }
+
+    .bibliography-list li {
+        margin-bottom: 15px;
+        padding-left: 20px;
+        text-indent: -20px;
+        line-height: 1.6;
+    }
+
+    .bibliography-list li::before {
+        content: "• ";
+        color: #c87100;
+        font-weight: bold;
+    }
+
+    .bibliography-list a {
+        color: #4fc3f7;
+        text-decoration: none;
+        transition: color 0.3s;
+    }
+
+    .bibliography-list a:hover {
+        color: #FFD369;
+        text-decoration: underline;
+    }
+
+    .citation {
+        font-weight: 500;
+        color: #BBBBBB;
+    }
+
+    .source {
+        font-style: italic;
+        color: #9E9E9E;
+        font-size: 0.9em;
+        display: block;
+        margin-left: 20px;
+    }
+
+    .citation-note {
+        font-size: 0.8em;
+        color: #9E9E9E;
+        margin-top: 30px;
+        border-top: 1px dashed #555;
+        padding-top: 10px;
+    }
+    body {
+            background: linear-gradient(135deg, #121212 0%, #1a1a1a 100%);
+            color: #E0E0E0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        h1 {
+            font-size: 48px;
+            color: #c87100;
+            margin-bottom: 10px;
+        }
+
+        .subtitle {
+            font-size: 20px;
+            color: #BBBBBB;
+            font-weight: 400;
+            margin-top: 0;
+        }
+
+        .section, .card {
+            margin-bottom: 40px;
+            transition: transform 0.3s ease;
+        }
+
+        .section:hover, .card:hover {
+            transform: translateY(-5px);
+        }
+
+        h2 {
+            font-size: 32px;
+            color: #FFD369;
+            border-bottom: 2px solid #c87100;
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+        }
+
+        p, ul {
+            font-size: 18px;
+            line-height: 1.8;
+            color: #FFFFFF;
+            margin: 10px 0;
+        }
+
+        ul {
+            padding-left: 20px;
+        }
+
+        li {
+            margin-bottom: 10px;
+        }
+
+        .highlight {
+            color: #FFD369;
+            font-weight: bold;
+        }
+
+        footer {
+            text-align: center;
+            margin-top: 40px;
+            font-size: 14px;
+            color: #BBBBBB;
+        }
+
+        #back_button{
+            cursor: pointer;
+            position:fixed;
+            top: 0;
+            left: 0;
+            filter: invert(100%);
+            width: 80px;
+            margin: 20px;
+        }
+        
+        #back_button:hover{
+            filter: invert(80%);
+        }
+
+        .tooltip {
+            position: relative;
+            display: inline-block;
+            color: #FFD369;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .tooltip-text {
+            visibility: hidden;
+            background-color: #333;
+            color: #fff;
+            text-align: center;
+            padding: 5px 10px;
+            border-radius: 5px;
+            position: absolute;
+            z-index: 1;
+            bottom: 125%;
+            left: 50%;
+            transform: translateX(-50%);
+            opacity: 0;
+            transition: opacity 0.3s;
+            white-space: nowrap;
+            max-width: 90vw;
+            overflow-wrap: break-word;
+            box-sizing: border-box;
+        }
+
+        .tooltip:hover .tooltip-text {
+            visibility: visible;
+            opacity: 1;
+        }
+
+        .card {
+            background: #1e1e1e;
+            border-radius: 12px;
+            padding: 25px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+            border-left: 4px solid #c87100;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(200, 113, 0, 0.1) 0%, transparent 100%);
+            z-index: 0;
+        }
+
+        .card-content {
+            position: relative;
+            z-index: 1;
+        }
+
+        .card h2 {
+            border-bottom: none;
+            padding-bottom: 0;
+            margin-bottom: 15px;
+            color: #FFD369;
+            font-size: 28px;
+        }
+
+        .card li::before {
+            content: '•';
+            color: #c87100;
+            font-weight: bold;
+            display: inline-block;
+            width: 1em;
+            margin-left: -1em;
+        }
+
+        .audio-comparison {
+            display: flex;
+            gap: 20px;
+            margin-top: 20px;
+            flex-wrap: wrap;
+        }
+
+        .audio-sample {
+            flex: 1;
+            min-width: 250px;
+            background: #1e1e1e;
+            padding: 15px;
+            border-radius: 8px;
+            border-left: 3px solid #c87100;
+        }
+
+    </style>
+</head>
+
+<header>
+    <h1>Bibliografía</h1>
+</header>
+
+<img id="back_button" src="img/ev_1/home.png">
+<section class="container" id="bibliografia">
+    <h2>Bibliografía y Referencias</h2>
+    
+    <div class="bibliography-container">
+        <h3>Artículos Científicos</h3>
+
+        <h3>Documentación Técnica</h3>
+        <ul class="bibliography-list">
+            <li>
+                <span class="citation">Google Cloud (2023).</span>
+                <a href="https://cloud.google.com/text-to-speech/docs" target="_blank" rel="noopener noreferrer">
+                    Text-to-Speech Documentation
+                </a>
+                <span class="source">Google Cloud Platform</span>
+            </li>
+        </ul>
+
+        <h3>Recursos Adicionales</h3>
+        <ul class="bibliography-list">
+            <li>
+                <span class="citation">DeepMind Blog (2016).</span>
+                <a href="https://deepmind.com/blog/article/wavenet-generative-model-raw-audio" target="_blank" rel="noopener noreferrer">
+                    WaveNet: Generative Model for Raw Audio
+                </a>
+            </li>
+
+        </ul>
+    
+    <h3>Apis utilizadas</h3>
+    <ul class="bibliography-list">
+        <li>
+            <span class="citation">Google Cloud.</span>
+            <a href="https://console.cloud.google.com/welcome/new?inv=1&invt=AbyWbQ&project=liquid-fulcrum-460220-m0" target="_blank" rel="noopener noreferrer">
+                WaveNet: Generative Model for Raw Audio
+            </a>
+        </li>
+
+    </ul>
+</div>
+</div>
+
+</section>
