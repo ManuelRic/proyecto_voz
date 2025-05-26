@@ -40,6 +40,7 @@ document.getElementById("sintetizar").addEventListener("click", async () => {
     imgElement.style.display = "block";
 
   } catch (error) {
-    console.error("Error al generar voz:", error);
+    console.error("Error al generar voz:", error)
+    alert("La API se encuentra en mantenimiento. Por favor siga las intrucciones de más abajo.");
   }
 });
