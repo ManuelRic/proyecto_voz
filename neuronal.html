@@ -18,6 +18,7 @@
     background-color: #121212;
     margin: 0;
     padding: 0;
+    color: #f0f0f0;
   }
 
   h1 {
@@ -229,7 +230,46 @@
     <p class="subtitle"><i>Adaptación de F5-Spanish</i></p>
 
     <div class="container">
-      
+      <section class="section">
+        <h2>¿Qué es F5-TTS y qué hace?</h2>
+        <p>F5-TTS es una tecnología que permite que una computadora hable como una persona real, teniendo la capacidad de leer texto en voz alta de forma fluida, clara y muy parecida a cómo hablaría un ser humano. Es capaz de imitar tu propia voz con una pequeña muestra.</p>
+      </section>
+      <section class="section">
+        <h2>¿Cómo fue entrenado?</h2>
+        <p>Se usaron miles de horas de grabaciones hablando en múltiples idiomas. La Inteligencia Artificial aprendió cómo suenan las palabras, el tono y el ritmo del habla. Actualmente es capaz de hablar por sí misma.</p>
+      </section>
+      <section class="section">
+        <h2>¿Cómo funciona?</h2>
+        <ol>
+          <li>Entrada de texto para convertir a voz.</li>
+          <li>Preparación de combinación texto/voz.</li>
+          <li>Entrada de fragmento de voz a replicar.</li>
+          <li>El sistema empieza a generar la voz (comienza como ruido y termina en una voz clara, fluida y muy parecida).
+            <ul>
+            <li>ConvNeXT ayuda al sistema a entender mejor el texto.</li>
+            <li>Diffusion Transformer genera la voz (desde el ruido hasta la voz clara).</li>
+            </ul>
+          </li>
+          <li>Se aplica Sway Sampling, que permite que los primeros pasos del modelo (los más importantes) se hagan con más detalle. Así se mejora el ritmo y tono general de la voz.</li>
+        </ol>
+      </section>
+      <section class="section">
+        <h2>¿Qué se logra?</h2>
+        <ul>
+          <li>Voz natural.</li>
+          <li>Cambio de idiomas.</li>
+          <li>Imitar voces con grabaciones de corta duración.</li>
+          <li>Generar audio rápidamente.</li>
+        </ul>
+      </section>
+      <section class="section">
+        <h2>Limitaciones</h2>
+        <ul>
+          <li>No se puede controlar factores como las emociones.</li>
+          <li>Dado que el espectrograma es más largo que el texto, es poco eficiente.</li>
+        </ul>
+      </section>
+
       <section class="section">
         
         <h2>Sube un archivo de audio (.wav):</h2>
