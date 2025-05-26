@@ -22,11 +22,12 @@
       align-items: center;
     }
 
-    h1 {
-      color: #c87100;
-      margin-bottom: 50px;
-      text-align: center; /* Ensures text is centered horizontally */
-    }
+  h1 {
+    text-align: center;
+    color: #c87100;
+    padding: 0;
+    margin-top: 10%;
+  }
 
     .tts-container {
       padding: 30px;
@@ -151,12 +152,22 @@
           height: 0; /* No thumb visible */
       }
 
+    .subtitle {
+    text-align: center;
+    color: #c87100;
+    font-size: 1rem;
+    margin-top: -1em;
+    opacity: 0.8;
+    }
 
   </style>
 </head>
 <body>
 
-  <h1>🗣️ TTS Paramétrica</h1>
+  <h1>Síntesis Paramétrica</h1>
+  <p class="subtitle"><i>Adaptación de SpeechSynthesis</i></p>
+
+
   <div class="tts-container">
     <label for="text">Introduzca su texto:</label>
     <textarea id="text" rows="4">Escucha este mismo texto o redacta el tuyo propio.</textarea>
