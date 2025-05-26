@@ -69,9 +69,65 @@
   #back_button:hover{
     filter: invert(80%);
   }
+
+  .subtitle {
+  text-align: center;
+  color: #c87100;
+  font-size: 1rem;
+  margin-top: -1em;
+  opacity: 0.8;
+  }
+
+  div .subtitle {
+  margin: 20px auto;
+  max-width: 600px;
+  color: #c87100;
+  font-size: 1rem;
+  margin-top: 1em;
+  opacity: 0.8;
+  }
+
+  #div_tutorial{
+      margin-top: 70px;
+      border-top: 2px solid #FFD369;
+  }
+
+  .tutorial-callout {
+  max-width: 600px;
+  margin: 20px auto;
+  color: #ffffff;
+  margin-top: 40px;
+  font-size: 1.1rem;
+  opacity: 0.85;
+  }
+
+  .tutorial-list {
+    color: #ffffff;
+    max-width: 600px;
+    margin: 20px auto;
+    padding-left: 20px;
+    font-size: 1rem;
+    opacity: 0.85;
+    line-height: 1.6;
+  }
+
+  .tutorial-list li {
+    margin-bottom: 10px;
+  }
+
+  .tutorial-list a {
+    color: #c87100;
+    text-decoration: none;
+    font-weight: bold;
+  }
+
+  .tutorial-list a:hover {
+    text-decoration: underline;
+  }
 </style>
 <body>
-  <h1>Texto a Voz Concatenativo</h1>
+  <h1>Síntesis Concatenativa</h1>
+  <p class="subtitle"><i>Adaptación de synth-me</i></p>
 
   <a href="page_1.html">
     <img id="back_button" src="img/ev_1/home.png" alt="Back">
@@ -89,6 +145,22 @@
 
     <h2>Fonemas:</h2>
     <p id="phonemes-output"></p>
+  </div>
+
+  <div id="div_tutorial"> 
+    <p class="tutorial-callout">
+      Si tienes curiosidad y deseas probar cómo sonarías en un sistema de texto a voz concatenativo, aquí te dejamos unos pasos muy sencillos.
+    </p>
+    <ul class="tutorial-list">
+      <li>Clona el repositorio de GitHub de <a href="https://github.com/stephengrice/synth-me.git" target="_blank">synth-me</a></li>
+      <li>Reemplaza los audios de los fonemas en el apartado <code>data/voices</code> por los tuyos</li>
+      <li>Añade varias palabras en el archivo <code>data/pronunciation.csv</code></li>
+      <li>Ejecuta en la consola dentro de la carpeta clonada <code>pip install -r requirements.txt</code></li>
+      <li>Por último ejecuta en la consola el comando <code>python synthme.py</code></li>
+    </ul>
+    <p class="subtitle">
+    Te recomendamos que hagas todos estos pasos en inglés, ya que es el idioma para el que originalmente se diseñó, no como en nuestro ejemplo de más arriba, en el que nos centramos en adaptarlo al español y para uso web.
+    </p>
   </div>
 
 
