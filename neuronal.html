@@ -218,6 +218,53 @@
   margin-top: -1em;
   opacity: 0.8;
   }
+
+  div .subtitle {
+  margin: 20px auto;
+  max-width: 600px;
+  color: #c87100;
+  font-size: 1rem;
+  margin-top: 1em;
+  opacity: 0.8;
+  }
+
+  #div_tutorial{
+      margin-top: 70px;
+      border-top: 2px solid #FFD369;
+  }
+
+  .tutorial-callout {
+  max-width: 600px;
+  margin: 20px auto;
+  color: #ffffff;
+  margin-top: 40px;
+  font-size: 1.1rem;
+  opacity: 0.85;
+  }
+
+  .tutorial-list {
+    color: #ffffff;
+    max-width: 600px;
+    margin: 20px auto;
+    padding-left: 20px;
+    font-size: 1rem;
+    opacity: 0.85;
+    line-height: 1.6;
+  }
+
+  .tutorial-list li {
+    margin-bottom: 10px;
+  }
+
+  .tutorial-list a {
+    color: #c87100;
+    text-decoration: none;
+    font-weight: bold;
+  }
+
+  .tutorial-list a:hover {
+    text-decoration: underline;
+  }
 </style>
 </head>
 <body>
@@ -272,7 +319,7 @@
       
         
         <label for="genText">Texto a generar:</label>
-        <textarea id="genText" >Esto es una muestra de como trabaja nuestro texto a voz. Espero que te guste el resultado. Es recomendable usar audios de entre 20 y 30 segundos.</textarea>
+        <textarea id="genText" >Esto es una muestra de como trabaja la síntesis neuronal. Espero que te guste el resultado. Es recomendable usar audios de entre 20 y 30 segundos.</textarea>
         <br><br>
 
         <button id="sintetizar">Generar voz</button>
@@ -293,6 +340,23 @@
     <img id="spectrogram" alt="Espectrograma generado" style="display: none; width: 100%;">
     </section>
     
+    </div>
+
+    <div id="div_tutorial"> 
+      <p class="tutorial-callout">
+        En caso de que la API se encuentre en mantenimiento, aquí tienes otra forma sencilla de probar la síntesis, que solo tomará unos pocos pasos
+      </p>
+      <ul class="tutorial-list">
+        <li>Abre el enlace del cuaderno de Google Colab <a href="https://colab.research.google.com/drive/1mm4NAlZVZq2_oL6ftijY64-PeEYwnqG1?usp=sharing" target="_blank">Spanish-F5.ipynb</a></li>
+        <li>Asegúrate de conectarte al entorno de ejecución con <code>GPU T4</code> </li>
+        <li>Clica en el apartado de <code>Entorno de ejecución</code> y vuelve a clicar en <code>Ejecutar todas</code></li>
+        <li>Tras unos minutos esperando a que se terminen de ejecutar las celdas aparecerá un enlace al final en <code>Running on public URL:</code> en el que deberás clicar</li>
+        <li>Ese enlace te llevará a una página de gradio donde podrás probar el modelo de síntesis neuronal</li>
+        <li>El resto es seguir los mismos pasos que en nuestra página web. Lo único diferente es que para introducir el texto de referencia deberás abrir el apartado de <code>Configuraciones Avanzadas</code></li>
+      </ul>
+      <p class="subtitle">
+      Te recomendamos que todos los audios de referencia que utilices sean de al menos 15 segundos y que los textos que quieras generar acaben siempre con un punto.
+      </p>
     </div>
     
     <script>

@@ -42,5 +42,8 @@ document.getElementById("sintetizar").addEventListener("click", async () => {
   } catch (error) {
     console.error("Error al generar voz:", error)
     alert("La API se encuentra en mantenimiento. Por favor siga las intrucciones de más abajo.");
+    
+    // Desplaza suavemente hasta el final de la página (al div con el tutorial)
+    document.getElementById("div_tutorial").scrollIntoView({ behavior: "smooth" });
   }
 });
