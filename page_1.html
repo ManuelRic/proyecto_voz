@@ -82,18 +82,21 @@
             <ul>
                 <li>
                     <span class="v_p">Ventajas:</span>
-                    <p class="p_vd">La principal ventaja de la síntesis de voz concatenativa reside en la posibilidad de generar audio a partir de texto de una forma muy sencilla y que puede 
-                        llegar a cumplir con una calidad media, especialmente si las unidades concatenadas han sido grabadas en contextos fonéticos similares. 
-                        Además, una vez desarrollado, este sistema puede funcionar de manera bastante eficiente en tiempo real, sin necesidad de gran poder de cómputo, 
-                        lo que lo hace adecuado para dispositivos con recursos limitados.</p>
+                    <ul>
+                        <li>Generación de audio de forma sencilla</li>
+                        <li>Si las unidades concatenadas han sido grabadas en contextos fonéticos similares llega a tener una buena calidad</li>
+                        <li>El sistema puede funcionar de manera bastante eficiente en tiempo real, 
+                            sin necesidad de gran poder de cómputo</li>
+                    </ul>
                 </li>
                 <li>
                     <span class="v_p">Problemas:</span>
-                    <p class="p_vd">Sin embargo, este enfoque presenta importantes limitaciones. Uno de sus principales inconvenientes es que al depender de una base de datos de 
-                        grabaciones, la voz sintetizada solo puede reproducir combinaciones que ya estén incluidas o que puedan construirse a partir los archivos guardados. 
-                        Esto provoca transiciones poco naturales entre fragmento y si las condiciones acústicas no coinciden perfectamente puede empeorar más. Además, requiere 
-                        de esfuerzo en el proceso de grabación y el etiquetado inicial puede ser tedioso. Por último, no es posible modificar el estilo, la entonación o la emoción 
-                        del habla sin rehacer las muestra de audio.</p>
+                    <ul>
+                        <li>La voz sintetizada solo puede reproducir combinaciones que ya estén incluidas o 
+                            que puedan construirse a partir los archivos guardados. </li>
+                        <li>Transiciones poco naturales entre fragmento y si las condiciones acústicas no coinciden perfectamente</li>
+                        <li>No es posible modificar el estilo, la entonación o la emoción</li>
+                    </ul>
                 </li>
             </ul>
 
@@ -103,29 +106,39 @@
         
         <div class="synthesis-section" id="SP">
             <h3><span class="sintesis">Síntesis</span> <span class="glitch-text">Paramétrica</span></h3>
-            <p>Después llegaron los modelos matemáticos. En lugar de usar grabaciones completas, estos sistemas intentaron simular la voz humana mediante fórmulas y estadísticas. Utilizando modelos matemáticos, se podían generar sonidos de manera más flexible, sin depender de una base de datos pregrabada de palabras o fragmentos de audio. Estos modelos trabajaban creando las ondas sonoras a partir de parámetros calculados que replicaban las características del habla humana, como la frecuencia, la duración y el tono. Aunque este enfoque mejoró la fluidez y la capacidad de generar una variedad más amplia de sonidos, aún presentaba desafíos en términos de naturalidad, ya que no siempre lograba imitar perfectamente las sutilezas del lenguaje humano.</p>
+            <p>Los sistemas paramétricos representaron un avance significativo frente a la concatenación tradicional. En lugar de unir fragmentos pregrabados, estos modelos generan el audio mediante algoritmos matemáticos que simulan el tracto vocal humano. Utilizan parámetros acústicos como:</p>
+    
+    <ul>
+        <li>Frecuencia fundamental (F0) para el tono</li>
+        <li>Coeficientes espectrales para los formantes</li>
+        <li>Parámetros de excitación para las consonantes</li>
+    </ul>
+    
+    <p>El enfoque más común fue el <strong>vocoder paramétrico</strong>, que analizaba grabaciones reales para extraer estos parámetros
+         y luego los usaba para sintetizar nuevas frases. Aunque superaba los problemas de discontinuidad de la concatenación, introducía 
+         sus propias limitaciones en calidad y naturalidad.</p>
+    
+    <ul>
+        <li>
+            <span class="v_p">Ventajas:</span>
             <ul>
-                <li>
-                    <span class="v_p">Ventajas:</span>
-                    <ul>
-                        <li>Requiere menos recursos computacionales que la síntesis neuronal, por lo que es más eficiente para dispositivos con poca potencia.</li>
-                        <li>Es más fácil de controlar y ajustar parámetros específicos como tono, velocidad o entonación.</li>
-                        <li>Puede generar voz en tiempo real sin necesidad de modelos pesados.</li>
-                        <li>Ideal para sistemas embebidos, hardware limitado o aplicaciones donde la naturalidad no es prioritaria.</li>
-                    </ul>
-                </li>
-                <li>
-                    <span class="v_p">Problemas:</span>
-                    <ul>
-                        <li>La voz suena más robótica o artificial en comparación con la síntesis neuronal.</li>
-                        <li>Limitada expresividad y menor capacidad de transmitir emociones humanas.</li>
-                        <li>Menor calidad general del audio, especialmente en frases largas o complejas.</li>
-                        <li>Menos adaptable a diferentes idiomas y acentos con resultados naturales.</li>
-                    </ul>
-                </li>
+                <li>Mayor flexibilidad que la concatenación al no depender de unidades pregrabadas</li>
+                <li>Permite modificar parámetros como velocidad, tono y timbre de forma independiente</li>
+                <li>Requiere menos almacenamiento que bases de datos de audio completas</li>
             </ul>
+        </li>
+        <li>
+            <span class="v_p">Problemas:</span>
+            <ul>
+                <li>Calidad de voz "robótica" debido a la simplificación del modelo acústico</li>
+                <li>Dificultad para capturar la naturalidad de la voz</li>
+                <li>Limitada capacidad para expresar emociones o estilos de habla</li>
+            </ul>
+        </li>
+    </ul>
 
-            <button id="test_button_p">¡Pruebalo!</button>
+    <button id="test_button_p">¡Pruebalo!</button>
+</div>
         </div>
         
         <div class="synthesis-section" id="SN">
@@ -138,7 +151,6 @@
                         <li>Sonido muy natural, con ritmo, entonación, pausas y hasta emociones. Mejoran constantemente con más datos y entrenamiento.</li>
                         <li>Genera voces más realistas y expresivas, ideales para aplicaciones conversacionales, audiolibros y asistentes virtuales.</li>
                         <li>Permite entrenar voces personalizadas, adaptadas a marcas, personajes o estilos específicos.</li>
-                        <li>Capacidad de adaptación a diferentes idiomas y acentos con alta fidelidad.</li>
                     </ul>
                 </li>
                 <li>
