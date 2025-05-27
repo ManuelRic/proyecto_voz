@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <title>Síntesis neuronal demo</title>
-  <link rel="icon" href="img/ev_1/logo.png" type="image/x-icon">
+  <link rel="icon" href="img/ev_1/logo_pro.png">
 <style>
   @font-face {
     font-family: 'CalSans';
@@ -315,7 +315,7 @@
         </ol>
       </section>
 
-      <section class="section">
+      <section class="section" >
         <h2>Retos generados</h2>
         <p>Debido al gran avance en este tipo de tecnologías, a día de hoy es muy difícil diferenciar cuando una voz es real o ha sido generado mediante inteligencia artificial.</p>
         <p>Este problema ha llevado a muchas empresas a crear una posible solución. Como por ejemplo Meta con su software de marcado de audios generados con inteligencia artificial llamado <a href="https://github.com/facebookresearch/audioseal" target="_blank">audioseal</a>.
@@ -343,14 +343,15 @@
             </div>
           </div>
         </div>
+        
+        
+        <div id="mensaje-final-bueno" style="display: none; text-align: center; margin-top: 40px; color: #FFD369; font-size: 1.2rem;">
+          <p>Has acertado, enhorabuena. Parece que comprendes como diferenciar los espectrogramas ¿Habrá sido por lo difuso que se ve el pitch en el audio generado por IA, los extraños espacios completamente negros o la rara distribución espectral? O quién sabe, al final era un 50/50.</p>
+        </div>
 
-<div id="mensaje-final-bueno" style="display: none; text-align: center; margin-top: 40px; color: #FFD369; font-size: 1.2rem;">
-  <p>Has acertado, enhorabuena. Parece que comprendes como diferenciar los espectrogramas ¿Habrá sido por lo difuso que se ve el pitch en el audio generado por IA, los extraños espacios completamente negros o la rara distribución espectral? O quién sabe, al final era un 50/50.</p>
-</div>
-
-<div id="mensaje-final-malo" style="display: none; text-align: center; margin-top: 40px; color: #FFD369; font-size: 1.2rem;">
-  <p>Respuesta errónea. Prueba a observar las líneas de los formantes (F0, F1, F2, etc), los espacios negros o la distribución espectral. </p>
-</div>
+        <div id="mensaje-final-malo" style="display: none; text-align: center; margin-top: 40px; color: #FFD369; font-size: 1.2rem;">
+          <p>Respuesta errónea. Prueba a observar las líneas de los formantes (F0, F1, F2, etc), los espacios negros o la distribución espectral. </p>
+        </div>
 
       </section>
 
