@@ -256,14 +256,29 @@
     margin-bottom: 10px;
   }
 
-  .tutorial-list a {
+  a {
     color: #c87100;
     text-decoration: none;
     font-weight: bold;
   }
 
-  .tutorial-list a:hover {
+  a:hover {
     text-decoration: underline;
+  }
+
+  .play-button {
+    display: block;
+    margin: 0 auto;
+    font-family: 'CalSans', sans-serif;
+    color: rgb(255, 255, 255);
+    background-color: #7e5929;
+    padding: 12px 20px;
+    font-size: 16px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    width:fit-content;
+    margin-top: 20px;
   }
 </style>
 </head>
@@ -279,13 +294,12 @@
     <div class="container">
       <section class="section">
         <h2>¿Qué es F5-TTS y qué hace?</h2>
-        <p>F5-TTS es un sistema de síntesis neuronal que tiene la capacidad de leer texto en voz alta de forma fluida, clara y muy parecida a cómo hablaría un ser humano. Es capaz de imitar tu propia voz con una pequeña muestra.</p>
+        <p>F5-TTS es un sistema de síntesis neuronal que tiene la capacidad de leer texto en voz alta de forma fluida, clara y muy parecida a cómo hablaría un ser humano.</p>
+        <p>Este sistema es capaz de imitar tu propia voz con una pequeña muestra gracias a que se han usado miles de horas de grabaciones hablando en múltiples idiomas y acentos. La Inteligencia Artificial aprendió cómo suenan las palabras, el tono y el ritmo del habla, todo esto para poder clonar voz en unos pocos segundos.</p>
+
       </section>
+
       <section class="section">
-        <h2>¿Cómo fue entrenado?</h2>
-        <p>Se han usado miles de horas de grabaciones hablando en múltiples idiomas. La Inteligencia Artificial aprendió cómo suenan las palabras, el tono y el ritmo del habla.</p>
-      </section>
-      <section class="section" style="margin-bottom: 100px;">
         <h2>¿Cómo funciona?</h2>
         <ol>
           <li>Entrada de texto para convertir a voz.</li>
@@ -302,6 +316,47 @@
       </section>
 
       <section class="section">
+        <h2>Retos generados</h2>
+        <p>Debido al gran avance en este tipo de tecnologías, a día de hoy es muy difícil diferenciar cuando una voz es real o ha sido generado mediante inteligencia artificial.</p>
+        <p>Este problema ha llevado a muchas empresas a crear una posible solución. Como por ejemplo Meta con su software de marcado de audios generados con inteligencia artificial llamado <a href="https://github.com/facebookresearch/audioseal" target="_blank">audioseal</a>.
+          Pero con los conocimientos adquiridos en la asignatura somos capaces de poder diferenciar este tipo de problemas, o eso creemos. </p>
+        <p>A continuación podrás observar dos espectrogramas diferentes, uno corresponde a la voz real de una persona y el otro a un audio generado con inteligencia artificial a partir de audios de la misma persona.</p>
+        <div id="spectrogram-comparison" style="display: flex; justify-content: center; gap: 40px; margin-top: 30px; flex-wrap: wrap;">
+          <div style="flex: 1; max-width: 45%; text-align: center;">
+            <img src="img/ev_1/espectrograma_real.png" alt="Espectrograma Real" style="width: 100%; border-radius: 10px; box-shadow: 0 4px 12px rgba(0,0,0,0.3);">
+            <p style="color: #FFD369; margin-top: 10px;">Voz real</p>
+            <button class="play-button" onclick="mostrarAudio('real')" style="margin-top: 10px;" class="seleccion-boton">Seleccionar</button>
+            <div id="audio-real" style="display: none; margin-top: 15px;">
+              <audio controls style="width: 100%;">
+                <source src="audios/muestra_real.wav" type="audio/mp3">
+                Tu navegador no soporta audio.
+              </audio>
+            </div>
+          </div>
+          <div style="flex: 1; max-width: 45%; text-align: center;">
+            <img src="img/ev_1/espectrograma_falso.png" alt="Espectrograma IA" style="width: 100%; border-radius: 10px; box-shadow: 0 4px 12px rgba(0,0,0,0.3);">
+            <p style="color: #FFD369; margin-top: 10px;">Voz generada por IA</p>
+            <button class="play-button" onclick="mostrarAudio('ia')" style="margin-top: 10px;" class="seleccion-boton">Seleccionar</button>
+            <div id="audio-ia" style="display: none; margin-top: 15px;">
+              <audio controls style="width: 100%;">
+                <source src="audios/muestra_mentira.wav" type="audio/mp3">
+                Tu navegador no soporta audio.
+              </audio>
+            </div>
+          </div>
+        </div>
+
+<div id="mensaje-final-bueno" style="display: none; text-align: center; margin-top: 40px; color: #FFD369; font-size: 1.2rem;">
+  <p>Has acertado, enhorabuena. Parece que comprendes como diferenciar los espectrogramas ¿Habrá sido por lo difuso que se ve el pitch en el audio generado por IA, los extraños espacios completamente negros o la rara distribución espectral? O quién sabe, al final era un 50/50.</p>
+</div>
+
+<div id="mensaje-final-malo" style="display: none; text-align: center; margin-top: 40px; color: #FFD369; font-size: 1.2rem;">
+  <p>Respuesta errónea. Prueba a observar las líneas de los formantes (F0, F1, F2, etc), los espacios negros o la distribución espectral. </p>
+</div>
+
+      </section>
+
+      <section class="section" style="margin-top: 100px;">
         
         <h2>Sube un archivo de audio (.wav):</h2>
         <label class="file-upload" style="display: block;width: 80%;">Arrastra tu archivo de audio aquí o haz click para buscar en tu ordenador<input type="file" id="audioInput" accept="audio/wav"/></label>
@@ -371,6 +426,25 @@
         fileNameDisplay.textContent = "";
       }
     });
+
+
+
+
+    function mostrarAudio(tipo) {
+    if (tipo === 'real') {
+      document.getElementById('audio-real').style.display = 'block';
+      document.getElementById('audio-ia').style.display = 'none';
+      document.getElementById('mensaje-final-bueno').style.display = 'block';
+      document.getElementById('mensaje-final-malo').style.display = 'none';
+    } else if (tipo === 'ia') {
+      document.getElementById('audio-ia').style.display = 'block';
+      document.getElementById('audio-real').style.display = 'none';
+      document.getElementById('mensaje-final-malo').style.display = 'block';
+      document.getElementById('mensaje-final-bueno').style.display = 'none';
+      
+    }
+
+    }
     
 
   </script>
