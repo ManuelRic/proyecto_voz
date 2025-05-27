@@ -13,7 +13,7 @@ document.getElementById("sintetizar").addEventListener("click", async () => {
   const audioFile = fileInput.files[0];
 
   try {
-    const client = await Client.connect("jpgallegoar/Spanish-F5");
+    const client = await Client.connect("redradios/F5-TTS-Sp");
 
     const result = await client.predict("/infer", {
       ref_audio_orig: audioFile,
