@@ -163,15 +163,6 @@
             font-size: 28px;
         }
 
-        .card li::before {
-            content: '•';
-            color: #c87100;
-            font-weight: bold;
-            display: inline-block;
-            width: 1em;
-            margin-left: -1em;
-        }
-
         .audio-comparison {
             display: flex;
             gap: 20px;
@@ -210,8 +201,7 @@
         }
         .spectrogram-container {
             display: flex;
-            justify-content: space-around;
-            align-items: flex-start;
+            align-items: start;
             gap: 30px;
             margin: 30px 0;
         }
@@ -219,7 +209,7 @@
         .spectrogram-item {
             flex: 1;
             min-width: 0;
-            text-align: center;
+            text-align: start;
         }
 
         .spectrogram-item img {
@@ -240,7 +230,7 @@
         @media (max-width: 768px) {
             .spectrogram-container {
                 flex-direction: column;
-                align-items: center;
+                align-items: start;
             }
             
             .spectrogram-item {
@@ -282,6 +272,7 @@
             margin-bottom: 8px;
             font-size: 16px;
             line-height: 1.5;
+            align-items: start;
         }
 
         .technical-conclusion {
@@ -467,7 +458,7 @@ En otras palabras, de todas los posibles niveles cuantizados, el nivel 80 tiene 
             <div class="spectrogram-item">
                 <img src="img/ev_1/espctrogramama1.png" alt="Espectrograma WaveNet">
                 <div class="spectrogram-caption">
-                    <h4>Características WaveNet</h4>
+                    <h4 style="text-align: center;">Características WaveNet</h4>
                     <ul>
                         <li><strong>Estructura armónica limpia:</strong> Bandas de frecuencia paralelas y continuas</li>
                         <li><strong>Transiciones suaves:</strong> Cambios graduales entre consonantes y vocales</li>
@@ -479,7 +470,7 @@ En otras palabras, de todas los posibles niveles cuantizados, el nivel 80 tiene 
             <div class="spectrogram-item">
                 <img src="img/ev_1/espctrogramama2.png" alt="Espectrograma Paramétrico">
                 <div class="spectrogram-caption">
-                    <h4>Limitaciones Paramétricas</h4>
+                    <h4 style="text-align: center;">Limitaciones Paramétricas</h4>
                     <ul>
                         <li><strong>Artefactos de concatenación:</strong> Líneas verticales marcadas entre unidades</li>
                         <li><strong>Pérdida de armónicos:</strong> Bandas de frecuencia interrumpidas</li>
